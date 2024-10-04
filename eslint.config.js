@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 import astroPlugin from "eslint-plugin-astro";
 
 export default tseslint.config(
-  { ignores: ["**/*.config.*"] },
+  { ignores: ["**/*.config.*", ".prettierrc.mjs"] },
   {
     plugins: {
       import: importPlugin,
