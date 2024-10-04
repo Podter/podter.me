@@ -1,7 +1,7 @@
 import eslint from "@eslint/js";
+import astroPlugin from "eslint-plugin-astro";
 import importPlugin from "eslint-plugin-import";
 import tseslint from "typescript-eslint";
-import astroPlugin from "eslint-plugin-astro";
 
 export default tseslint.config(
   { ignores: ["**/*.config.*", ".prettierrc.mjs"] },
@@ -43,5 +43,5 @@ export default tseslint.config(
   {
     linterOptions: { reportUnusedDisableDirectives: true },
     languageOptions: { parserOptions: { project: true } },
-  }
+  },
 );
