@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "pnpm typecheck && astro build",
-    "preview": "astro preview",
+    "preview": "wrangler pages dev",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
     "typecheck": "astro check"
@@ -15,7 +15,9 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "^11.1.0",
     "@astrojs/tailwind": "^5.1.1",
+    "@cloudflare/workers-types": "^4.20240925.0",
     "@eslint/js": "^9.11.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@typescript-eslint/parser": "^8.8.0",
@@ -28,7 +30,8 @@
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.8.0"
+    "typescript-eslint": "^8.8.0",
+    "wrangler": "^3.80.0"
   },
   "packageManager": "pnpm@9.12.0+sha512.4abf725084d7bcbafbd728bfc7bee61f2f791f977fd87542b3579dcb23504d170d46337945e4c66485cd12d588a0c0e570ed9c477e7ccdd8507cf05f3f92eaca"
 }
