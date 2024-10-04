@@ -15,6 +15,7 @@
     "astro": "^5.0.0-beta.3"
   },
   "devDependencies": {
+    "@astrojs/tailwind": "^5.1.1",
     "@eslint/js": "^9.11.1",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@typescript-eslint/parser": "^8.8.0",
@@ -25,6 +26,7 @@
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.8",
+    "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.8.0"
   },
