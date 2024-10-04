@@ -2,6 +2,7 @@
 import "~/styles/geist.css";
 import "@fontsource-variable/newsreader";
 
+import Footer from "~/components/footer.astro";
 import Navbar from "~/components/navbar.astro";
 
 export interface Props {
@@ -26,5 +27,6 @@ const { title } = Astro.props;
     <main class="flex flex-col">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
