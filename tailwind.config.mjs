@@ -10,6 +10,7 @@ export default {
       fontFamily: {
         sans: ["GeistSans", ...fontFamily.sans],
         mono: ["GeistMono", ...fontFamily.mono],
+        serif: ['"Newsreader Variable"', ...fontFamily.serif],
       },
     },
   },
