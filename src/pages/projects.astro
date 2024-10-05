@@ -1,4 +1,9 @@
 ---
+import { Image } from "astro:assets";
+
+import ExternalLink from "~/components/icons/external-link.astro";
+import Git from "~/components/icons/git.astro";
+import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
 
 export const prerender = true;
@@ -7,9 +12,53 @@ export const prerender = true;
 <Layout title="Projects" className="space-y-6">
   <h1 class="font-serif text-3xl font-medium">projects</h1>
   <p class="prose prose-neutral dark:prose-invert">
-    lorem ipsum dolor sit amet consectetur adipisicing elit. obcaecati explicabo
-    reiciendis quisquam, debitis aut dolorum praesentium porro, modi repudiandae
-    voluptates architecto aspernatur fugit? Harum id minima ea fuga quia
-    accusantium.
+    a collection of projects i&apos;ve worked on.
   </p>
+  {
+    PROJECTS.map(
+      ({ title, description, img, url, action = "open", sourceUrl }) => (
+        <div class="group flex flex-col space-y-3">
+          <a
+            href={url ?? sourceUrl}
+            class="flex aspect-video items-center justify-center overflow-hidden md:aspect-[24/9]"
+          >
+            <Image
+              src={img}
+              alt={title}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </a>
+          <div class="flex items-center justify-between">
+            <a
+              href={url ?? sourceUrl}
+              class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+            >
+              {title}
+            </a>
+            <div class="flex space-x-2">
+              {url && (
+                <a
+                  href={url}
+                  class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
+                >
+                  <ExternalLink size={12} />
+                  {action}
+                </a>
+              )}
+              {sourceUrl && (
+                <a
+                  href={sourceUrl}
+                  class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
+                >
+                  <Git size={12} />
+                  source code
+                </a>
+              )}
+            </div>
+          </div>
+          <p class="prose prose-neutral dark:prose-invert">{description}</p>
+        </div>
+      ),
+    )
+  }
 </Layout>
