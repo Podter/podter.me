@@ -1,22 +1,25 @@
+import * as path from "node:path";
+import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
 import astroPlugin from "eslint-plugin-astro";
 import importPlugin from "eslint-plugin-import";
+import sveltePlugin from "eslint-plugin-svelte";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
+  includeIgnoreFile(path.join(import.meta.dirname, ".gitignore")),
   { ignores: ["**/*.config.*", ".prettierrc.mjs"] },
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
+  ...astroPlugin.configs.recommended,
+  ...astroPlugin.configs["jsx-a11y-recommended"],
+  ...sveltePlugin.configs["flat/recommended"],
   {
     plugins: {
       import: importPlugin,
     },
-    extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-      ...astroPlugin.configs.recommended,
-      ...astroPlugin.configs["jsx-a11y-recommended"],
-    ],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "error",
@@ -41,7 +44,15 @@ export default tseslint.config(
     },
   },
   {
-    linterOptions: { reportUnusedDisableDirectives: true },
-    languageOptions: { parserOptions: { project: true } },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+        project: true,
+        extraFileExtensions: [".svelte"],
+      },
+    },
   },
 );

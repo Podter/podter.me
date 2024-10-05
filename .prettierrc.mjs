@@ -3,8 +3,9 @@
 /** @typedef {import("prettier").Config} PrettierConfig */
 /** @typedef {import("prettier-plugin-tailwindcss").PluginOptions} TailwindConfig */
 /** @typedef {import("@ianvs/prettier-plugin-sort-imports").PluginConfig} SortImportsConfig */
+/** @typedef {import("prettier-plugin-svelte").PluginConfig} SvelteConfig */
 
-/** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
+/** @type { PrettierConfig | SortImportsConfig | TailwindConfig | SvelteConfig } */
 export default {
   plugins: [
     "prettier-plugin-astro",
@@ -27,6 +28,12 @@ export default {
       files: "*.astro",
       options: {
         parser: "astro",
+      },
+    },
+    {
+      files: "*.svelte",
+      options: {
+        parser: "svelte",
       },
     },
   ],
