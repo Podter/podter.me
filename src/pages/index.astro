@@ -1,15 +1,87 @@
 ---
+import Clock from "~/components/icons/clock.astro";
+import MapPin from "~/components/icons/map-pin.astro";
 import Layout from "~/layouts/layout.astro";
 
 export const prerender = true;
 ---
 
-<Layout title="Astro">
-  <h1 class="font-serif text-3xl font-medium">nonthaphat chaisu</h1>
-  <p class="prose prose-neutral dark:prose-invert">
-    i&apos;m podter. i&apos;m a student and self-taught developer. i enjoy
-    coding, and playing games in my free time. i&apos;m currently trying to
-    manage my life to get into an university. i like adventure games, indie
-    games, south park, and bluey.
-  </p>
+<Layout title="Podter" className="space-y-12">
+  <section class="flex flex-col space-y-6">
+    <h1 class="font-serif text-3xl font-medium">nonthaphat chaisu</h1>
+    <div class="flex flex-col space-y-2.5">
+      <p
+        class="inline-flex items-center gap-3 text-neutral-700 dark:text-neutral-300"
+      >
+        <MapPin size={20} /> thailand
+      </p>
+      <p
+        class="inline-flex items-center gap-3 text-neutral-700 dark:text-neutral-300"
+      >
+        <Clock size={20} /> 5 october 2024 • 15:22:28
+      </p>
+    </div>
+    <p class="prose prose-neutral dark:prose-invert">
+      i&apos;m podter. i&apos;m a student and self-taught developer. i enjoy
+      coding, and playing games in my free time. i&apos;m currently trying to
+      manage my life to get into an university. i like adventure games, indie
+      games, south park, and bluey.
+    </p>
+    <a
+      href="#"
+      class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+    >
+      about me →
+    </a>
+  </section>
+  <section class="flex flex-col space-y-8">
+    <h2 class="font-serif text-2xl font-medium">projects</h2>
+    <div class="grid grid-cols-2 grid-rows-2 gap-6">
+      {
+        [...Array(4)].map(() => (
+          <div class="prose prose-neutral h-full w-full space-y-3 dark:prose-invert">
+            <a
+              href="#"
+              class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+            >
+              podter.me
+            </a>
+            <p>
+              the website that you are currently on right now. built with astro
+              and deployed to cloudflare pages.
+            </p>
+          </div>
+        ))
+      }
+    </div>
+    <a
+      href="#"
+      class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+    >
+      view all projects →
+    </a>
+  </section>
+  <section class="flex flex-col space-y-8">
+    <h2 class="font-serif text-2xl font-medium">writing</h2>
+    <div class="flex flex-col space-y-6">
+      {
+        [...Array(3)].map(() => (
+          <a href="#" class="flex w-full justify-between">
+            <p class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600">
+              how to build a website with astro
+            </p>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400">
+              5 oct, 2024
+            </p>
+          </a>
+        ))
+      }
+    </div>
+    <a
+      href="#"
+      class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+    >
+      view all posts →
+    </a>
+  </section>
 </Layout>
