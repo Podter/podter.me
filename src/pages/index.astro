@@ -1,6 +1,6 @@
 ---
-import Clock from "~/components/icons/clock.astro";
 import MapPin from "~/components/icons/map-pin.astro";
+import Lanyard from "~/components/lanyard.svelte";
 import Layout from "~/layouts/layout.astro";
 
 export const prerender = true;
@@ -9,17 +9,13 @@ export const prerender = true;
 <Layout title="Podter" className="space-y-12">
   <section class="flex flex-col space-y-6">
     <h1 class="font-serif text-3xl font-medium">nonthaphat chaisu</h1>
-    <div class="flex flex-col space-y-2.5">
+    <div class="flex flex-col gap-2.5">
       <p
         class="inline-flex items-center gap-3 text-neutral-700 dark:text-neutral-300"
       >
         <MapPin size={20} /> thailand
       </p>
-      <p
-        class="inline-flex items-center gap-3 text-neutral-700 dark:text-neutral-300"
-      >
-        <Clock size={20} /> 5 october 2024 • 15:22:28
-      </p>
+      <Lanyard client:load />
     </div>
     <p class="prose prose-neutral dark:prose-invert">
       i&apos;m podter. i&apos;m a student and self-taught developer. i enjoy

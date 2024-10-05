@@ -1,10 +1,6 @@
----
-export interface Props {
-  size?: string | number;
-}
-
-const size = Astro.props.size ?? 24;
----
+<script lang="ts">
+export let size = 24;
+</script>
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
