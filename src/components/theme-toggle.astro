@@ -51,26 +51,28 @@
     switchOn.play();
   }
 
-  const toggleThemeBtn = document.getElementById("toggle-theme");
+  document.addEventListener("astro:page-load", () => {
+    const toggleThemeBtn = document.getElementById("toggle-theme");
 
-  if (toggleThemeBtn) {
-    toggleThemeBtn.addEventListener("mouseenter", () => {
-      if (!switchOff || !switchOn) {
-        initHowl();
-      }
-    });
+    if (toggleThemeBtn) {
+      toggleThemeBtn.addEventListener("mouseenter", () => {
+        if (!switchOff || !switchOn) {
+          initHowl();
+        }
+      });
 
-    toggleThemeBtn.addEventListener("click", () => {
-      const isDark = document.documentElement.classList.contains("dark");
-      if (isDark) {
-        document.documentElement.classList.remove("dark");
-        playSwitchOn();
-      } else {
-        document.documentElement.classList.add("dark");
-        playSwitchOff();
-      }
-    });
-  }
+      toggleThemeBtn.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.contains("dark");
+        if (isDark) {
+          document.documentElement.classList.remove("dark");
+          playSwitchOn();
+        } else {
+          document.documentElement.classList.add("dark");
+          playSwitchOff();
+        }
+      });
+    }
+  });
 
   window
     .matchMedia("(prefers-color-scheme: dark)")

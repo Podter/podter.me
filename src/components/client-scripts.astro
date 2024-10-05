@@ -1,5 +1,5 @@
 ---
-
+import { ClientRouter } from "astro:transitions";
 ---
 
 <script is:inline>
@@ -11,8 +11,14 @@
       ? "dark"
       : "light";
   }
-  const isDark = getTheme() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  function updateTheme() {
+    const isDark = getTheme() === "dark";
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+  }
+
+  updateTheme();
+  document.addEventListener("astro:after-swap", () => updateTheme());
 
   if (typeof localStorage !== "undefined") {
     const observer = new MutationObserver(() => {
@@ -25,3 +31,5 @@
     });
   }
 </script>
+
+<ClientRouter />
