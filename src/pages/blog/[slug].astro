@@ -1,19 +1,95 @@
 ---
-import Layout from "~/layouts/layout.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { format } from "date-fns/format";
 
-export function getStaticPaths() {
-  return [{ params: { slug: "astro" } }];
+import BlogImage from "~/components/blog/image.astro";
+import BlogPre from "~/components/blog/pre.astro";
+import Layout from "~/layouts/layout.astro";
+import { cn } from "~/lib/utils";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
 }
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await post.render();
 ---
 
-<Layout title="Blog" className="space-y-6">
-  <h1 class="font-serif text-3xl font-medium">
-    How to build a website with astro
-  </h1>
-  <p class="prose prose-neutral dark:prose-invert">
-    lorem ipsum dolor sit amet consectetur adipisicing elit. obcaecati explicabo
-    reiciendis quisquam, debitis aut dolorum praesentium porro, modi repudiandae
-    voluptates architecto aspernatur fugit? Harum id minima ea fuga quia
-    accusantium.
-  </p>
+<Layout title="Blog">
+  <div class="mb-8 flex flex-col">
+    <h1 class="mb-2 font-serif text-3xl font-medium">
+      {post.data.title}
+    </h1>
+    <span class="text-sm text-neutral-600 dark:text-neutral-400">
+      published on {format(post.data.date, "do MMMM, yyyy").toLowerCase()}
+    </span>
+  </div>
+  <article
+    class={cn(
+      "prose prose-neutral dark:prose-invert",
+      "prose-headings:font-serif prose-headings:font-medium",
+      "prose-a:font-medium prose-a:underline prose-a:decoration-neutral-400 prose-a:decoration-1 prose-a:underline-offset-4 dark:prose-a:decoration-neutral-600",
+      "prose-th:font-sans",
+      "prose-code:font-mono",
+      "prose-img:w-full prose-img:my-0",
+    )}
+  >
+    {
+      post.data.cover && (
+        <BlogImage src={post.data.cover} alt={post.data.title} class="mt-0" />
+      )
+    }
+    <Content components={{ img: BlogImage, pre: BlogPre }} />
+  </article>
 </Layout>
+
+<style is:global>
+  html.dark .astro-code,
+  html.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  @media (min-width: 768px) {
+    .astro-code::-webkit-scrollbar {
+      @apply h-2 w-2 rounded-md bg-transparent;
+    }
+    .astro-code::-webkit-scrollbar-thumb {
+      @apply rounded-md bg-neutral-200;
+    }
+    .astro-code::-webkit-scrollbar-track {
+      @apply rounded-md bg-neutral-50;
+    }
+    .astro-code::-webkit-scrollbar-button {
+      @apply hidden;
+    }
+
+    html.dark .astro-code::-webkit-scrollbar-thumb {
+      @apply bg-neutral-700;
+    }
+    html.dark .astro-code::-webkit-scrollbar-track {
+      @apply bg-neutral-800;
+    }
+  }
+
+  .rehype-autolink-headings {
+    @apply no-underline;
+  }
+
+  .rehype-autolink-headings::after {
+    @apply ml-1.5 inline h-4 w-4 opacity-0 transition-opacity hover:opacity-50;
+    content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEwIDEzYTUgNSAwIDAgMCA3LjU0LjU0bDMtM2E1IDUgMCAwIDAtNy4wNy03LjA3bC0xLjcyIDEuNzEiLz48cGF0aCBkPSJNMTQgMTFhNSA1IDAgMCAwLTcuNTQtLjU0bC0zIDNhNSA1IDAgMCAwIDcuMDcgNy4wN2wxLjcxLTEuNzEiLz48L3N2Zz4=");
+  }
+
+  html.dark .rehype-autolink-headings::after {
+    @apply invert;
+  }
+</style>

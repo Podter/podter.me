@@ -1,15 +1,32 @@
 ---
+import { getCollection } from "astro:content";
+import { format } from "date-fns/format";
+
 import Layout from "~/layouts/layout.astro";
 
 export const prerender = true;
+
+const posts = await getCollection("blog");
 ---
 
-<Layout title="Blog" className="space-y-6">
+<Layout title="Blog" className="space-y-8">
   <h1 class="font-serif text-3xl font-medium">blog</h1>
-  <p class="prose prose-neutral dark:prose-invert">
-    lorem ipsum dolor sit amet consectetur adipisicing elit. obcaecati explicabo
-    reiciendis quisquam, debitis aut dolorum praesentium porro, modi repudiandae
-    voluptates architecto aspernatur fugit? Harum id minima ea fuga quia
-    accusantium.
+  <p class="prose prose-neutral !mt-6 dark:prose-invert">
+    a collection of blog posts i&apos;ve written.
   </p>
+  {
+    posts.map(({ slug, data }) => (
+      <a href={`/blog/${slug}`} class="group flex flex-col space-y-2">
+        <span class="font-serif text-xl font-medium decoration-neutral-400 decoration-1 underline-offset-4 group-hover:underline dark:decoration-neutral-600">
+          {data.title}
+        </span>
+        <p class="prose prose-neutral dark:prose-invert">
+          {data.description.toLowerCase()}
+        </p>
+        <span class="text-sm text-neutral-600 dark:text-neutral-400">
+          {format(data.date, "do MMMM, yyyy").toLowerCase()}
+        </span>
+      </a>
+    ))
+  }
 </Layout>

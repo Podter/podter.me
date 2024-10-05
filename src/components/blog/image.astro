@@ -1,0 +1,56 @@
+---
+import type { LocalImageProps, RemoteImageProps } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import { getImage } from "astro:assets";
+
+import { cn } from "~/lib/utils";
+import ExternalLink from "../icons/external-link.astro";
+
+type Props = LocalImageProps | RemoteImageProps;
+
+const props = Astro.props;
+
+if (props.alt === undefined || props.alt === null) {
+  throw new Error("Image components must specify an `alt` attribute.");
+}
+
+if (typeof props.width === "string") {
+  props.width = parseInt(props.width);
+}
+
+if (typeof props.height === "string") {
+  props.height = parseInt(props.height);
+}
+
+const image = await getImage(props);
+
+const additionalAttributes: HTMLAttributes<"img"> = {};
+if (image.srcSet.values.length > 0) {
+  additionalAttributes.srcset = image.srcSet.attribute;
+}
+
+if (import.meta.env.DEV) {
+  additionalAttributes["data-image-component"] = "true";
+}
+
+const rawImage = import.meta.env.DEV
+  ? image.src
+  : image.src.replace(/\/cdn-cgi\/image\/[^/]+\//, "/");
+---
+
+<a
+  href={rawImage}
+  class={cn(
+    "group flex h-full w-full flex-col !no-underline relative my-[2em]",
+    props.class,
+  )}
+  target="_blank"
+>
+  <span
+    class="absolute -top-6 right-0 inline-flex items-center gap-1 pb-1 text-sm text-neutral-600 opacity-0 transition-[opacity,color] hover:text-neutral-950 group-hover:opacity-100 dark:text-neutral-400 dark:hover:text-neutral-50"
+  >
+    <ExternalLink size={12} />
+    open
+  </span>
+  <img src={image.src} {...additionalAttributes} {...image.attributes} />
+</a>

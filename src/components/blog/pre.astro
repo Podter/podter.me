@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import CopyCode from "./copy-code.svelte";
+
+type Props = HTMLAttributes<"pre">;
+
+const props = Astro.props;
+
+const id = (Math.random() + 1).toString(36).substring(7);
+---
+
+<div class="group relative">
+  <CopyCode client:visible id={id} />
+  <pre {...props} id={id}><slot /></pre>
+</div>
