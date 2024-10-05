@@ -1,6 +1,7 @@
 // @ts-check
 
 import cloudflare from "@astrojs/cloudflare";
+import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 
@@ -13,5 +14,5 @@ export default defineConfig({
     },
     imageService: "cloudflare",
   }),
-  integrations: [tailwind()],
+  integrations: [tailwind(), svelte()],
 });
