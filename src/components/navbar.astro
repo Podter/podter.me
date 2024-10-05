@@ -27,7 +27,8 @@ const { pathname } = Astro.url;
         Object.entries(NAV_ITEMS).map(([path, { name }]) => {
           const isActive =
             pathname === path ||
-            (pathname.startsWith(path) && pathname[path.length] === "/");
+            (pathname.startsWith(path) && pathname[path.length] === "/") ||
+            (path === "/" && pathname === "/about");
           return (
             <a
               href={path}
