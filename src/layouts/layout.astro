@@ -1,10 +1,12 @@
 ---
+import "~/styles/animation.css";
 import "~/styles/geist.css";
 import "@fontsource-variable/newsreader";
 
 import ClientScripts from "~/components/client-scripts.astro";
 import Footer from "~/components/footer.astro";
 import Navbar from "~/components/navbar.astro";
+import { SLIDE_ANIMATION } from "~/lib/slide";
 
 export interface Props {
   title: string;
@@ -26,7 +28,7 @@ const { title } = Astro.props;
     class="mx-auto mb-40 mt-14 flex w-full max-w-2xl flex-col bg-neutral-100 px-4 font-sans text-neutral-950 antialiased dark:bg-neutral-900 dark:text-neutral-50"
   >
     <Navbar />
-    <main class="flex flex-col space-y-6">
+    <main class="flex flex-col space-y-6" transition:animate={SLIDE_ANIMATION}>
       <slot />
     </main>
     <Footer />
