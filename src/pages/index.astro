@@ -1,6 +1,7 @@
 ---
 import MapPin from "~/components/icons/map-pin.astro";
 import Lanyard from "~/components/lanyard.svelte";
+import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
 
 export const prerender = true;
@@ -34,20 +35,19 @@ export const prerender = true;
     <h2 class="font-serif text-2xl font-medium">projects</h2>
     <div class="grid grid-cols-2 grid-rows-2 gap-6">
       {
-        [...Array(4)].map(() => (
-          <div class="prose prose-neutral h-full w-full space-y-3 dark:prose-invert">
-            <a
-              href="/projects"
-              class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
-            >
-              podter.me
-            </a>
-            <p>
-              the website that you are currently on right now. built with astro
-              and deployed to cloudflare pages.
-            </p>
-          </div>
-        ))
+        PROJECTS.filter(({ shortDescription }) => shortDescription).map(
+          ({ title, url, sourceUrl, shortDescription }) => (
+            <div class="prose prose-neutral h-full w-full space-y-3 dark:prose-invert">
+              <a
+                href={url ?? sourceUrl}
+                class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+              >
+                {title}
+              </a>
+              <p>{shortDescription}</p>
+            </div>
+          ),
+        )
       }
     </div>
     <a

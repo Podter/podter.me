@@ -10,6 +10,7 @@ import urlShortener from "~/assets/projects/url-shortener.png";
 interface Project {
   title: string;
   description: string;
+  shortDescription?: string;
   img: ImageMetadata;
   url?: string;
   action?: string;
@@ -21,6 +22,8 @@ export const PROJECTS = [
     title: "podter.me",
     description:
       "the website that you are currently on right now. built with astro, tailwindcss, auth.js, cloudflare d1, cloudflare kv, and deployed to cloudflare pages.",
+    shortDescription:
+      "the website that you are currently on right now. built with astro.",
     img: podWeb,
     sourceUrl: "https://github.com/Podter/podter.me",
   },
@@ -28,6 +31,8 @@ export const PROJECTS = [
     title: "s.podter.me",
     description:
       "the simplest url shortener. built with sveltekit, cloudflare kv, and deployed to cloudflare pages.",
+    shortDescription:
+      "the simplest url shortener. built with sveltekit, and cloudflare kv.",
     img: urlShortener,
     url: "https://s.podter.me",
     sourceUrl: "https://github.com/Podter/s.podter.me",
@@ -36,6 +41,8 @@ export const PROJECTS = [
     title: "compress.podter.me",
     description:
       "the simplest video compressor on the internet. built with react, ffmpeg, and webassembly. installable as a pwa on any device and works offline.",
+    shortDescription:
+      "the simplest video compressor. built with react, pwa, ffmpeg, and webassembly.",
     img: compress,
     url: "https://compress.podter.me",
     sourceUrl: "https://github.com/Podter/compress.podter.me",
@@ -43,7 +50,9 @@ export const PROJECTS = [
   {
     title: "Lunar Run",
     description:
-      "an endless runner game. you play as a cat named lunar, and you have to collect as many cupcakes as possible while avoiding the obstacles. built c# and unity.",
+      "an endless runner game. you play as a cat named lunar, and you have to collect as many cupcakes as possible while avoiding the obstacles. built with c# and unity.",
+    shortDescription:
+      "an endless runner game where you play as a cat named lunar. built with unity.",
     img: lunarRun,
     url: "https://lunar.podter.me",
     action: "play",
