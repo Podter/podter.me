@@ -4,6 +4,7 @@ import eslint from "@eslint/js";
 import astroPlugin from "eslint-plugin-astro";
 import importPlugin from "eslint-plugin-import";
 import sveltePlugin from "eslint-plugin-svelte";
+import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -52,6 +53,10 @@ export default tseslint.config(
         parser: tseslint.parser,
         project: true,
         extraFileExtensions: [".svelte"],
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
       },
     },
   },
