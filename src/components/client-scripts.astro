@@ -30,6 +30,10 @@ import { ClientRouter } from "astro:transitions";
       attributeFilter: ["class"],
     });
   }
+
+  document.addEventListener("astro:after-preparation", () =>
+    window.scrollTo(0, 0),
+  );
 </script>
 
 <ClientRouter />
