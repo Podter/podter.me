@@ -45,6 +45,12 @@ export default tseslint.config(
     },
   },
   {
+    files: ["**/*.astro"],
+    rules: {
+      "@typescript-eslint/no-unsafe-return": "off",
+    },
+  },
+  {
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },

@@ -10,7 +10,7 @@ type Props = LocalImageProps | RemoteImageProps;
 
 const props = Astro.props;
 
-if (props.alt === undefined || props.alt === null) {
+if (!props.alt) {
   throw new Error("Image components must specify an `alt` attribute.");
 }
 
@@ -52,5 +52,10 @@ const rawImage = import.meta.env.DEV
     <ExternalLink size={12} />
     open
   </span>
-  <img src={image.src} {...additionalAttributes} {...image.attributes} />
+  <img
+    src={image.src}
+    alt={props.alt}
+    {...image.attributes}
+    {...additionalAttributes}
+  />
 </a>
