@@ -2,6 +2,9 @@ import type { AuthConfig, Session } from "@auth/core/types";
 import { Auth, customFetch } from "@auth/core";
 import Discord from "@auth/core/providers/discord";
 import GitHub from "@auth/core/providers/github";
+import { sha256 } from "ohash";
+
+import { getD1 } from "~/database";
 
 export const AUTH_API = "/api/auth";
 
@@ -40,34 +43,35 @@ export const authConfig = ({ runtime }: Runtime): AuthConfig => ({
   ],
   session: { strategy: "jwt" },
   callbacks: {
-    // async signIn({ user, account }) {
-    //   if (user.email) {
-    //     const emailHash = sha256(user.email);
+    async signIn({ user, account }) {
+      if (user.email) {
+        const db = getD1({ runtime });
 
-    //     const db = getD1();
-    //     const existingMessages = await db
-    //       .select({ user: guestbook.user })
-    //       .from(guestbook)
-    //       .where(eq(guestbook.emailHash, emailHash))
-    //       .limit(1);
+        const email = user.email;
+        const existingMessage = await db.query.guestbook.findFirst({
+          columns: {
+            user: true,
+          },
+          where: ({ emailHash }, { eq }) => eq(emailHash, sha256(email)),
+        });
 
-    //     const existingMessage = existingMessages[0];
-    //     if (existingMessage) {
-    //       const isSameProvider = existingMessage.user.includes(
-    //         account?.provider!,
-    //       );
-    //       if (isSameProvider) {
-    //         return true;
-    //       } else {
-    //         return false;
-    //       }
-    //     }
+        if (existingMessage) {
+          const isSameProvider = existingMessage.user.includes(
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-non-null-asserted-optional-chain
+            account?.provider!,
+          );
+          if (isSameProvider) {
+            return true;
+          } else {
+            return false;
+          }
+        }
 
-    //     return true;
-    //   }
+        return true;
+      }
 
-    //   return false;
-    // },
+      return false;
+    },
     jwt({ account, profile, token }) {
       if (account && profile) {
         if (account.provider === "discord") {
