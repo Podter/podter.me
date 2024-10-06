@@ -7,6 +7,8 @@ interface Env {
   DISCORD_BOT_TOKEN: string;
   GITHUB_ID: string;
   GITHUB_SECRET: string;
+  D1_DATABASE: D1Database;
+  KV_CACHE: KVNamespace;
 }
 
 type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
