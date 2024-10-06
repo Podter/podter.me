@@ -11,12 +11,15 @@
     "typecheck": "astro check"
   },
   "dependencies": {
+    "@auth/core": "^0.36.0",
     "@fontsource-variable/newsreader": "^5.1.0",
     "astro": "^5.0.0-beta.3",
+    "auth-astro": "^4.1.2",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "geist": "^1.3.1",
     "howler": "^2.2.4",
+    "set-cookie-parser": "^2.7.0",
     "tailwind-merge": "^2.5.3"
   },
   "devDependencies": {
@@ -31,6 +34,7 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@tailwindcss/typography": "^0.5.15",
     "@types/howler": "^2.2.12",
+    "@types/set-cookie-parser": "^2.4.10",
     "@typescript-eslint/parser": "^8.8.0",
     "eslint": "^9.11.1",
     "eslint-plugin-astro": "^1.2.4",
