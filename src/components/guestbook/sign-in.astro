@@ -1,0 +1,36 @@
+---
+import Discord from "../icons/discord.astro";
+import GitHub from "../icons/github.astro";
+---
+
+<div class="flex space-x-4">
+  <button
+    id="sign-in-github"
+    class="inline-flex items-center gap-1.5 font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+  >
+    <GitHub size={14} />
+    sign in with github
+  </button>
+  <button
+    id="sign-in-discord"
+    class="inline-flex items-center gap-1.5 font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+  >
+    <Discord size={14} />
+    sign in with discord
+  </button>
+</div>
+
+<script>
+  import { signIn } from "auth-astro/client";
+
+  const github = document.getElementById("sign-in-github");
+  const discord = document.getElementById("sign-in-discord");
+
+  if (github) {
+    github.addEventListener("click", () => signIn("github"));
+  }
+
+  if (discord) {
+    discord.addEventListener("click", () => signIn("discord"));
+  }
+</script>

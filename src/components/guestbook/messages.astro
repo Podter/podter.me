@@ -1,0 +1,24 @@
+---
+import { getD1 } from "~/database";
+import { cache } from "~/lib/cache";
+import UserMessage from "./user-message.astro";
+
+const getMessages = cache(async (locals) => {
+  const db = getD1(locals);
+  const messages = await db.query.guestbook.findMany({
+    columns: {
+      id: true,
+      user: true,
+      message: true,
+    },
+    orderBy: ({ createdAt }, { desc }) => desc(createdAt),
+  });
+  return messages;
+}, "guestbook");
+
+const messages = await getMessages(Astro.locals);
+---
+
+<div class="flex flex-col space-y-4 sm:space-y-3">
+  {messages.map((message) => <UserMessage message={message} />)}
+</div>

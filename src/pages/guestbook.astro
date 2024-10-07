@@ -1,45 +1,24 @@
 ---
+import Form from "~/components/guestbook/form.astro";
+import Messages from "~/components/guestbook/messages.astro";
+import Spinner from "~/components/spinner.svelte";
 import Layout from "~/layouts/layout.astro";
-import { getSession } from "~/lib/auth";
 
 export const prerender = false;
-
-const session = await getSession(Astro.request, Astro.locals);
 ---
 
 <Layout title="Projects" className="space-y-6">
   <h1 class="font-serif text-3xl font-medium">guestbook</h1>
-  {
-    session ? (
-      <>
-        <p class="prose prose-neutral dark:prose-invert">
-          lorem ipsum dolor sit amet consectetur adipisicing elit. obcaecati
-          explicabo reiciendis quisquam, debitis aut dolorum praesentium porro,
-          modi repudiandae voluptates architecto aspernatur fugit? Harum id
-          minima ea fuga quia accusantium.
-        </p>
-        <pre>
-          <code>{JSON.stringify(session, null, 2)}</code>
-        </pre>
-        <button id="signout">sign out</button>
-      </>
-    ) : (
-      <>
-        <button id="discord">discord</button>
-        <button id="github">github</button>
-      </>
-    )
-  }
+  <p class="prose prose-neutral dark:prose-invert">
+    sign my guestbook and leave your mark.
+  </p>
+  <Form server:defer>
+    <p
+      slot="fallback"
+      class="inline-flex h-6 items-center gap-1 text-sm font-medium text-neutral-600 transition-colors dark:text-neutral-400"
+    >
+      working <Spinner client:load />
+    </p>
+  </Form>
+  <Messages server:defer />
 </Layout>
-
-<script>
-  import { signIn, signOut } from "auth-astro/client";
-
-  const signOutBtn = document.getElementById("signout");
-  const discordBtn = document.getElementById("discord");
-  const githubBtn = document.getElementById("github");
-
-  signOutBtn?.addEventListener("click", () => signOut());
-  discordBtn?.addEventListener("click", () => signIn("discord"));
-  githubBtn?.addEventListener("click", () => signIn("github"));
-</script>

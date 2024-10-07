@@ -1,0 +1,38 @@
+---
+import { fetchUser } from "~/lib/fetch-user";
+import Avatar from "./avatar.svelte";
+
+interface Props {
+  message: {
+    id: number;
+    user: string;
+    message: string;
+  };
+}
+
+const { message } = Astro.props;
+
+const { name, url, avatar } = await fetchUser(Astro.locals, message.user);
+---
+
+<div class="flex items-center space-x-3 sm:space-x-2">
+  <Avatar
+    src={avatar}
+    alt={`${name}'s avatar`}
+    fallback={name.charAt(0).toUpperCase()}
+    client:visible
+  />
+  <p
+    class="inline-flex flex-col text-[15px] leading-[22px] sm:flex-row sm:items-center sm:gap-1 sm:!text-sm"
+  >
+    <a
+      href={url}
+      class="text-neutral-600 decoration-neutral-400 decoration-1 underline-offset-4 hover:underline dark:text-neutral-400 dark:decoration-neutral-600"
+    >
+      {name}:
+    </a>
+    <span class="text-neutral-700 dark:text-neutral-300">
+      {message.message}
+    </span>
+  </p>
+</div>

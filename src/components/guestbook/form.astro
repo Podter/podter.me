@@ -1,0 +1,34 @@
+---
+import { getD1 } from "~/database";
+import { getSession } from "~/lib/auth";
+import FormClient from "./form-client.svelte";
+import SignIn from "./sign-in.astro";
+
+const session = await getSession(Astro.request, Astro.locals);
+
+let existingMessage: string | undefined;
+if (session) {
+  const db = getD1(Astro.locals);
+  const data = await db.query.guestbook.findFirst({
+    columns: {
+      message: true,
+    },
+    where: ({ user }, { eq }) => eq(user, session.user.user),
+  });
+  if (data) {
+    existingMessage = data.message;
+  }
+}
+---
+
+{
+  session ? (
+    <FormClient
+      client:load
+      session={session}
+      initialMessage={existingMessage}
+    />
+  ) : (
+    <SignIn />
+  )
+}
