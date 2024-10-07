@@ -7,8 +7,6 @@ import Lanyard from "~/components/lanyard.svelte";
 import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
 
-export const prerender = true;
-
 const posts = await getCollection("blog");
 ---
 

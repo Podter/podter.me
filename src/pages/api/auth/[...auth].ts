@@ -47,5 +47,7 @@ const handler: APIRoute = async ({ cookies, request, url, locals }) => {
   return res;
 };
 
+export const prerender = false;
+
 export const GET = handler;
 export const POST = handler;

@@ -6,6 +6,8 @@ import { getD1, getUtcNow } from "~/database";
 import { guestbook } from "~/database/schema";
 import { getSession } from "~/lib/auth";
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request, locals }) => {
   const session = await getSession(request, locals);
   if (!session) {

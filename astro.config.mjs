@@ -13,7 +13,7 @@ import whiteout from "./src/constants/themes/lambda-whiteout.json";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: "hybrid",
   adapter: cloudflare({
     platformProxy: {
       enabled: true,
@@ -21,6 +21,9 @@ export default defineConfig({
     imageService: "cloudflare",
   }),
   integrations: [tailwind(), svelte(), mdx()],
+  experimental: {
+    serverIslands: true,
+  },
   markdown: {
     gfm: true,
     syntaxHighlight: "shiki",
