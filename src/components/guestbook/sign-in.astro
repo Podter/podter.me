@@ -21,16 +21,18 @@ import GitHub from "../icons/github.astro";
 </div>
 
 <script>
-  import { signIn } from "auth-astro/client";
+  document.addEventListener("astro:page-load", async () => {
+    const { signIn } = await import("auth-astro/client");
 
-  const github = document.getElementById("sign-in-github");
-  const discord = document.getElementById("sign-in-discord");
+    const github = document.getElementById("sign-in-github");
+    const discord = document.getElementById("sign-in-discord");
 
-  if (github) {
-    github.addEventListener("click", () => signIn("github"));
-  }
+    if (github) {
+      github.addEventListener("click", () => signIn("github"));
+    }
 
-  if (discord) {
-    discord.addEventListener("click", () => signIn("discord"));
-  }
+    if (discord) {
+      discord.addEventListener("click", () => signIn("discord"));
+    }
+  });
 </script>
