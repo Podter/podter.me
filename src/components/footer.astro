@@ -1,5 +1,5 @@
 ---
-
+import { SOCIALS } from "~/constants/socials";
 ---
 
 <footer class="mt-12 text-sm text-neutral-600 dark:text-neutral-400">
@@ -8,6 +8,21 @@
   />
   <div class="flex items-center justify-between">
     <span class="font-medium">podter._</span>
-    <span class="font-medium">github / discord / x / email</span>
+    <div class="flex gap-1 font-medium">
+      {
+        Object.entries(SOCIALS).map(([social, { href }], i) => (
+          <>
+            {i > 0 && <span>/</span>}
+            <a
+              class="text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
+              href={href}
+              target="_blank"
+            >
+              {social}
+            </a>
+          </>
+        ))
+      }
+    </div>
   </div>
 </footer>
