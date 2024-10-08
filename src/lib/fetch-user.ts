@@ -20,10 +20,6 @@ interface UserData {
   avatar: string;
 }
 
-function toBase64(str: string) {
-  return Buffer.from(str).toString("base64");
-}
-
 export const fetchUser = cache(
   async (locals, user: string): Promise<UserData> => {
     const { DISCORD_BOT_TOKEN, GITHUB_ID, GITHUB_SECRET } = locals.runtime.env;
@@ -47,7 +43,8 @@ export const fetchUser = cache(
     if (provider === "github") {
       const data = await fetch(`https://api.github.com/user/${userId}`, {
         headers: {
-          Authorization: `Basic ${toBase64(`${GITHUB_ID}:${GITHUB_SECRET}`)}`,
+          Authorization: `Basic ${btoa(`${GITHUB_ID}:${GITHUB_SECRET}`)}`,
+          "User-Agent": "podter-website",
         },
       }).then((res) => res.json<GitHubResponse>());
 
