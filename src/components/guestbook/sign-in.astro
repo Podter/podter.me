@@ -4,35 +4,38 @@ import GitHub from "../icons/github.astro";
 ---
 
 <div class="flex space-x-4">
-  <button
-    id="sign-in-github"
-    class="inline-flex items-center gap-1.5 font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
-  >
-    <GitHub size={14} />
-    sign in with github
-  </button>
-  <button
-    id="sign-in-discord"
-    class="inline-flex items-center gap-1.5 font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
-  >
-    <Discord size={14} />
-    sign in with discord
-  </button>
+  <sign-in provider="github">
+    <button
+      class="inline-flex items-center gap-1.5 font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+    >
+      <GitHub size={14} />
+      sign in with github
+    </button>
+  </sign-in>
+  <sign-in provider="discord">
+    <button
+      class="inline-flex items-center gap-1.5 font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+    >
+      <Discord size={14} />
+      sign in with discord
+    </button>
+  </sign-in>
 </div>
 
 <script>
-  document.addEventListener("astro:page-load", async () => {
-    const { signIn } = await import("auth-astro/client");
-
-    const github = document.getElementById("sign-in-github");
-    const discord = document.getElementById("sign-in-discord");
-
-    if (github) {
-      github.addEventListener("click", () => signIn("github"));
+  class SignInButton extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector("button");
+      if (button) {
+        button.addEventListener("click", this.handleSignIn.bind(this));
+      }
     }
 
-    if (discord) {
-      discord.addEventListener("click", () => signIn("discord"));
+    async handleSignIn() {
+      const { signIn } = await import("auth-astro/client");
+      await signIn(this.getAttribute("provider") ?? "");
     }
-  });
+  }
+
+  customElements.define("sign-in", SignInButton);
 </script>

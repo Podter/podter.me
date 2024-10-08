@@ -2,77 +2,73 @@
 
 ---
 
-<button
-  class="-mr-2 flex h-8 w-8 items-center justify-center"
-  id="toggle-theme"
->
-  <svg
-    class="h-3.5 w-3.5 fill-current"
-    viewBox="0 0 14 14"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="7" cy="7" r="7"></circle>
-  </svg>
-  <span class="sr-only">Toggle theme</span>
-</button>
+<theme-toggle>
+  <button class="-mr-2 flex h-8 w-8 items-center justify-center">
+    <svg
+      class="h-3.5 w-3.5 fill-current"
+      viewBox="0 0 14 14"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="7" cy="7" r="7"></circle>
+    </svg>
+    <span class="sr-only">Toggle theme</span>
+  </button>
+</theme-toggle>
 
 <script>
   import type { Howl } from "howler";
 
-  let switchOff: Howl;
-  let switchOn: Howl;
-
-  async function initHowl() {
-    const { Howl } = (await import(
-      // @ts-expect-error - howler is not typed
-      "howler/dist/howler.core.min"
-    )) as typeof import("howler");
-
-    switchOff = new Howl({
-      src: ["/sounds/switch-off.mp3"],
-    });
-
-    switchOn = new Howl({
-      src: ["/sounds/switch-on.mp3"],
-    });
-  }
-
-  async function playSwitchOff() {
-    if (!switchOff) {
-      await initHowl();
+  class ThemeToggle extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector("button");
+      if (button) {
+        button.addEventListener("mouseenter", this.initHowl.bind(this));
+        button.addEventListener("click", this.toggleTheme.bind(this));
+      }
     }
-    switchOff.play();
-  }
 
-  async function playSwitchOn() {
-    if (!switchOn) {
-      await initHowl();
+    async toggleTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      if (isDark) {
+        document.documentElement.classList.remove("dark");
+        await this.playSound("on");
+      } else {
+        document.documentElement.classList.add("dark");
+        await this.playSound("off");
+      }
     }
-    switchOn.play();
-  }
 
-  document.addEventListener("astro:page-load", () => {
-    const toggleThemeBtn = document.getElementById("toggle-theme");
+    switchOff: Howl | undefined;
+    switchOn: Howl | undefined;
 
-    if (toggleThemeBtn) {
-      toggleThemeBtn.addEventListener("mouseenter", () => {
-        if (!switchOff || !switchOn) {
-          initHowl();
-        }
+    async initHowl() {
+      const { Howl } = (await import(
+        // @ts-expect-error - howler is not typed
+        "howler/dist/howler.core.min"
+      )) as typeof import("howler");
+
+      this.switchOff = new Howl({
+        src: ["/sounds/switch-off.mp3"],
       });
 
-      toggleThemeBtn.addEventListener("click", () => {
-        const isDark = document.documentElement.classList.contains("dark");
-        if (isDark) {
-          document.documentElement.classList.remove("dark");
-          playSwitchOn();
-        } else {
-          document.documentElement.classList.add("dark");
-          playSwitchOff();
-        }
+      this.switchOn = new Howl({
+        src: ["/sounds/switch-on.mp3"],
       });
     }
-  });
+
+    async playSound(sound: "on" | "off") {
+      if (!this.switchOff || !this.switchOn) {
+        await this.initHowl();
+      }
+      if (sound === "on") {
+        this.switchOn?.play();
+      } else {
+        this.switchOff?.play();
+      }
+    }
+  }
+
+  customElements.define("theme-toggle", ThemeToggle);
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
