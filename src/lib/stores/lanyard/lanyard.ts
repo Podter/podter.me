@@ -58,6 +58,7 @@ export function useLanyard(intiialData?: LanyardData) {
 
     return () => {
       socket.close();
+      // @ts-expect-error - this is a valid clearInterval call
       clearInterval(interval);
     };
   });
