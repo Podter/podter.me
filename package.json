@@ -17,7 +17,6 @@
     "@astrojs/rss": "^4.0.7",
     "@auth/core": "^0.36.0",
     "@fontsource-variable/newsreader": "^5.1.0",
-    "@resvg/resvg-wasm": "^2.6.2",
     "astro": "^4.15.12",
     "auth-astro": "^4.1.2",
     "bits-ui": "^0.21.16",

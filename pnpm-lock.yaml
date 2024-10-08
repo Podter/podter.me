@@ -17,9 +17,6 @@ importers:
       '@fontsource-variable/newsreader':
         specifier: ^5.1.0
         version: 5.1.0
-      '@resvg/resvg-wasm':
-        specifier: ^2.6.2
-        version: 2.6.2
       astro:
         specifier: ^4.15.12
         version: 4.15.12(@types/node@22.7.4)(rollup@4.24.0)(typescript@5.6.2)
@@ -1293,10 +1290,6 @@ packages:
   '@pkgr/core@0.1.1':
     resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
-
-  '@resvg/resvg-wasm@2.6.2':
-    resolution: {integrity: sha512-FqALmHI8D4o6lk/LRWDnhw95z5eO+eAa6ORjVg09YRR7BkcM6oPHU9uyC0gtQG5vpFLvgpeU4+zEAz2H8APHNw==}
-    engines: {node: '>= 10'}
 
   '@rollup/pluginutils@5.1.2':
     resolution: {integrity: sha512-/FIdS3PyZ39bjZlwqFnWqCOVnW7o963LtKMwQOD0NhQqw22gSr2YY1afu3FxRip4ZCZNsD5jq6Aaz6QV3D/Njw==}
@@ -5631,8 +5624,6 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.1.1': {}
-
-  '@resvg/resvg-wasm@2.6.2': {}
 
   '@rollup/pluginutils@5.1.2(rollup@4.24.0)':
     dependencies:
