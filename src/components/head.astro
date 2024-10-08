@@ -29,10 +29,10 @@ const title = [titleProp, NAME].filter(Boolean).join(" · ");
 const resolvedImage = titleProp
   ? {
       src: new URL(
-        `/api/og?title=${encodeURIComponent(titleProp)}&description=${encodeURIComponent(description)}`,
+        `/api/og?title=${encodeURIComponent(pageType === "article" ? titleProp : titleProp.toLowerCase())}&description=${encodeURIComponent(publishedTime ?? description.toLowerCase())}`,
         Astro.site,
       ).toString(),
-      alt: `${title} - ${description}`,
+      alt: `${pageType === "article" ? titleProp : titleProp.toLowerCase()} - ${publishedTime ?? description.toLowerCase()}`,
     }
   : {
       src: new URL(OG_URL, Astro.site).toString(),
@@ -61,6 +61,16 @@ function formatCanonicalURL(url: string | URL) {
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
 <meta name="darkreader-lock" content="true" />
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: light)"
+  content="#f5f5f5"
+/>
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
+  content="#171717"
+/>
 
 <!-- Page Metadata -->
 <link rel="canonical" href={formatCanonicalURL(canonicalURL)} />

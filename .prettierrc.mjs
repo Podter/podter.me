@@ -23,6 +23,8 @@ export default {
   ],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
   importOrderTypeScriptVersion: "5.0.0",
+  tailwindAttributes: ["class", "className", "tw"],
+  tailwindFunctions: ["cn"],
   overrides: [
     {
       files: "*.astro",
