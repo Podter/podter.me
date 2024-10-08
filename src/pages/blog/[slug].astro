@@ -23,7 +23,12 @@ const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<Layout title="Blog">
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  pageType="article"
+  publishedTime={format(post.data.date, "d MMMM yyyy")}
+>
   <div class="mb-8 flex flex-col">
     <h1 class="mb-2 font-serif text-3xl font-medium">
       {post.data.title}

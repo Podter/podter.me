@@ -1,0 +1,113 @@
+---
+import {
+  DESCRIPTION,
+  NAME,
+  OG_ALT,
+  OG_HEIGHT,
+  OG_TYPE,
+  OG_URL,
+  OG_WIDTH,
+  TWITTER,
+} from "~/constants/metadata";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  pageType?: "website" | "article";
+  publishedTime?: string;
+  index?: boolean;
+}
+
+const {
+  title: titleProp,
+  description = DESCRIPTION,
+  pageType = "website",
+  publishedTime,
+  index = true,
+} = Astro.props;
+const title = [titleProp, NAME].filter(Boolean).join(" · ");
+const resolvedImage = titleProp
+  ? {
+      src: new URL(
+        `/api/og?title=${encodeURIComponent(titleProp)}&description=${encodeURIComponent(description)}`,
+        Astro.site,
+      ).toString(),
+      alt: `${title} - ${description}`,
+    }
+  : {
+      src: new URL(OG_URL, Astro.site).toString(),
+      alt: OG_ALT,
+    };
+const canonicalURL = new URL(Astro.request.url, Astro.site);
+
+function formatCanonicalURL(url: string | URL) {
+  const path = url.toString();
+  const hasQueryParams = path.includes("?");
+  if (hasQueryParams) {
+    path.replace(/\/?$/, "");
+  }
+  return path.replace(/\/?$/, hasQueryParams ? "" : "/");
+}
+---
+
+<!-- High Priority Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="generator" content={Astro.generator} />
+
+<!-- Low Priority Global Metadata -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+<meta name="darkreader-lock" content="true" />
+
+<!-- Page Metadata -->
+<link rel="canonical" href={formatCanonicalURL(canonicalURL)} />
+<meta name="description" content={description} />
+<meta name="author" content={NAME} />
+<meta name="creator" content={NAME} />
+<link rel="author" href={Astro.site} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={pageType} />
+<meta property="og:url" content={formatCanonicalURL(canonicalURL)} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name" content={NAME} />
+<meta property="og:image" content={resolvedImage.src} />
+<meta property="og:image:alt" content={resolvedImage.alt} />
+<meta property="og:image:type" content={OG_TYPE} />
+<meta property="og:image:width" content={OG_WIDTH} />
+<meta property="og:image:height" content={OG_HEIGHT} />
+{
+  publishedTime && (
+    <meta property="article:published_time" content={publishedTime} />
+  )
+}
+
+<!-- X/Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={formatCanonicalURL(canonicalURL)} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta name="twitter:site" content={NAME} />
+<meta name="twitter:creator" content={TWITTER} />
+<meta property="twitter:image" content={resolvedImage.src} />
+<meta name="twitter:image:alt" content={resolvedImage.alt} />
+<meta name="twitter:image:type" content={OG_TYPE} />
+<meta name="twitter:image:width" content={OG_WIDTH} />
+<meta name="twitter:image:height" content={OG_HEIGHT} />
+
+<!-- Robots -->
+<meta name="robots" content={index ? "index, follow" : "noindex"} />
+<meta
+  name="googlebot"
+  content={index
+    ? "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    : "noindex"}
+/>
+<meta
+  name="google-site-verification"
+  content="Jfc2vKkk95YzKNp4NaKjW08FQd11KPabjnJucKPeKVc"
+/>

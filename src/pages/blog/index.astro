@@ -4,13 +4,16 @@ import { format } from "date-fns/format";
 
 import Layout from "~/layouts/layout.astro";
 
+const TITLE = "Blog";
+const DESCRIPTION = "A collection of blog posts I've written.";
+
 const posts = await getCollection("blog");
 ---
 
-<Layout title="Blog" className="space-y-8">
-  <h1 class="font-serif text-3xl font-medium">blog</h1>
+<Layout title={TITLE} description={DESCRIPTION} className="space-y-8">
+  <h1 class="font-serif text-3xl font-medium">{TITLE.toLowerCase()}</h1>
   <p class="prose prose-neutral !mt-6 dark:prose-invert">
-    a collection of blog posts i&apos;ve written.
+    {DESCRIPTION.toLowerCase()}
   </p>
   {
     posts.map(({ slug, data }) => (

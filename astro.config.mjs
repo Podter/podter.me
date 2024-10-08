@@ -2,8 +2,10 @@
 
 import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
+import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
@@ -13,6 +15,7 @@ import whiteout from "./src/constants/themes/lambda-whiteout.json";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://podter.me",
   output: "hybrid",
   adapter: cloudflare({
     platformProxy: {
@@ -20,7 +23,23 @@ export default defineConfig({
     },
     imageService: "cloudflare",
   }),
-  integrations: [tailwind(), svelte(), mdx()],
+  integrations: [
+    tailwind(),
+    svelte(),
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes("/teapot"),
+    }),
+    robotsTxt({
+      policy: [
+        {
+          allow: ["/"],
+          disallow: ["/teapot"],
+          userAgent: "*",
+        },
+      ],
+    }),
+  ],
   experimental: {
     serverIslands: true,
   },

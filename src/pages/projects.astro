@@ -5,12 +5,15 @@ import ExternalLink from "~/components/icons/external-link.astro";
 import Git from "~/components/icons/git.astro";
 import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
+
+const TITLE = "Projects";
+const DESCRIPTION = "A collection of projects I've worked on.";
 ---
 
-<Layout title="Projects" className="space-y-6">
-  <h1 class="font-serif text-3xl font-medium">projects</h1>
+<Layout title={TITLE} description={DESCRIPTION} className="space-y-6">
+  <h1 class="font-serif text-3xl font-medium">{TITLE.toLowerCase()}</h1>
   <p class="prose prose-neutral dark:prose-invert">
-    a collection of projects i&apos;ve worked on.
+    {DESCRIPTION.toLowerCase()}
   </p>
   {
     PROJECTS.map(

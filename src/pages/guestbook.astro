@@ -5,12 +5,15 @@ import Spinner from "~/components/spinner.svelte";
 import Layout from "~/layouts/layout.astro";
 
 export const prerender = false;
+
+const TITLE = "Guestbook";
+const DESCRIPTION = "Sign my guestbook and leave your mark.";
 ---
 
-<Layout title="Projects" className="space-y-6">
-  <h1 class="font-serif text-3xl font-medium">guestbook</h1>
+<Layout title={TITLE} description={DESCRIPTION} className="space-y-6">
+  <h1 class="font-serif text-3xl font-medium">{TITLE.toLowerCase()}</h1>
   <p class="prose prose-neutral dark:prose-invert">
-    sign my guestbook and leave your mark.
+    {DESCRIPTION.toLowerCase()}
   </p>
   <Form server:defer />
   <Messages server:defer>

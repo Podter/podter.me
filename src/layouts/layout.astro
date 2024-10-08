@@ -1,25 +1,22 @@
 ---
+import type { Props as HeadProps } from "~/components/head.astro";
 import ClientScripts from "~/components/client-scripts.astro";
 import Footer from "~/components/footer.astro";
+import Head from "~/components/head.astro";
 import Navbar from "~/components/navbar.astro";
 import { SLIDE_ANIMATION } from "~/lib/slide";
 import { cn } from "~/lib/utils";
 
-export interface Props {
-  title: string;
+export interface Props extends HeadProps {
   className?: string;
 }
 
-const { title, className } = Astro.props;
+const { className, ...head } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <Head {...head} />
     <ClientScripts />
   </head>
   <body
