@@ -6,6 +6,7 @@ import MapPin from "~/components/icons/map-pin.astro";
 import Lanyard from "~/components/lanyard.svelte";
 import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
+import { cn } from "~/lib/utils";
 
 const posts = await getCollection("blog");
 ---
@@ -29,7 +30,10 @@ const posts = await getCollection("blog");
     </p>
     <a
       href="/about"
-      class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+      class={cn(
+        "font-medium transition-colors",
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+      )}
     >
       about me →
     </a>
@@ -43,7 +47,10 @@ const posts = await getCollection("blog");
             <div class="prose prose-neutral h-full w-full space-y-3 dark:prose-invert">
               <a
                 href={url ?? sourceUrl}
-                class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+                class={cn(
+                  "font-medium transition-colors",
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+                )}
               >
                 {title.toLowerCase()}
               </a>
@@ -55,7 +62,10 @@ const posts = await getCollection("blog");
     </div>
     <a
       href="/projects"
-      class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+      class={cn(
+        "font-medium transition-colors",
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+      )}
     >
       view all projects →
     </a>
@@ -66,7 +76,12 @@ const posts = await getCollection("blog");
       {
         posts.slice(0, 3).map(({ data, slug }) => (
           <a href={`/blog/${slug}`} class="flex w-full justify-between">
-            <p class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600">
+            <p
+              class={cn(
+                "font-medium transition-colors",
+                "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+              )}
+            >
               {data.title.toLowerCase()}
             </p>
             <p class="text-sm text-neutral-600 dark:text-neutral-400">
@@ -78,7 +93,10 @@ const posts = await getCollection("blog");
     </div>
     <a
       href="/blog"
-      class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+      class={cn(
+        "font-medium transition-colors",
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+      )}
     >
       view all posts →
     </a>

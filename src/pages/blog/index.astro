@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { format } from "date-fns/format";
 
 import Layout from "~/layouts/layout.astro";
+import { cn } from "~/lib/utils";
 
 const TITLE = "Blog";
 const DESCRIPTION = "A collection of blog posts I've written.";
@@ -18,7 +19,12 @@ const posts = await getCollection("blog");
   {
     posts.map(({ slug, data }) => (
       <a href={`/blog/${slug}`} class="group flex flex-col space-y-2">
-        <span class="font-serif text-xl font-medium decoration-neutral-400 decoration-1 underline-offset-4 group-hover:underline dark:decoration-neutral-600">
+        <span
+          class={cn(
+            "font-serif text-xl font-medium",
+            "underline decoration-neutral-400/0 decoration-1 underline-offset-4 transition-colors group-hover:decoration-neutral-400 dark:decoration-neutral-600/0 dark:group-hover:decoration-neutral-600",
+          )}
+        >
           {data.title}
         </span>
         <p class="prose prose-neutral dark:prose-invert">

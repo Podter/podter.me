@@ -5,6 +5,7 @@ import ExternalLink from "~/components/icons/external-link.astro";
 import Git from "~/components/icons/git.astro";
 import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
+import { cn } from "~/lib/utils";
 
 const TITLE = "Projects";
 const DESCRIPTION = "A collection of projects I've worked on.";
@@ -32,7 +33,10 @@ const DESCRIPTION = "A collection of projects I've worked on.";
           <div class="flex items-center justify-between">
             <a
               href={url ?? sourceUrl}
-              class="font-medium underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600"
+              class={cn(
+                "font-medium transition-colors",
+                "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+              )}
             >
               {title}
             </a>

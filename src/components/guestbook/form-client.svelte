@@ -62,7 +62,7 @@ async function deleteMessage() {
   <form class="flex w-full space-x-2" on:submit={submit}>
     <input
       class={cn(
-        "flex h-9 w-full border-b border-neutral-400 bg-transparent py-1 text-sm dark:border-neutral-600",
+        "flex h-9 w-full border-b border-neutral-400 bg-transparent py-1 text-sm transition-colors dark:border-neutral-600",
         "placeholder:text-neutral-600 dark:placeholder:text-neutral-400",
         "focus-visible:border-neutral-600 focus-visible:outline-none dark:focus-visible:border-neutral-400",
         "disabled:cursor-not-allowed disabled:opacity-50",
