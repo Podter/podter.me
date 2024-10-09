@@ -34,6 +34,10 @@ const { className, ...head } = Astro.props;
 </html>
 
 <style is:global>
+  ::selection {
+    @apply bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-950;
+  }
+
   @font-face {
     font-family: GeistSans;
     font-display: swap;
