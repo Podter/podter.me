@@ -27,9 +27,7 @@ const posts = await getCollection("blog");
         >
           {data.title}
         </span>
-        <p class="prose prose-neutral dark:prose-invert">
-          {data.description.toLowerCase()}
-        </p>
+        <p class="prose prose-neutral dark:prose-invert">{data.description}</p>
         <span class="text-sm text-neutral-600 dark:text-neutral-400">
           {format(data.date, "do MMMM, yyyy").toLowerCase()}
         </span>
