@@ -18,52 +18,58 @@ const DESCRIPTION = "A collection of projects I've worked on.";
   </p>
   {
     PROJECTS.map(
-      ({ title, description, img, url, action = "open", sourceUrl }) => (
-        <div class="group flex flex-col space-y-3">
-          <a
-            href={url ?? sourceUrl}
-            class="flex aspect-video items-center justify-center overflow-hidden md:aspect-[24/9]"
-          >
-            <Image
-              src={img}
-              alt={title}
-              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          </a>
-          <div class="flex items-center justify-between">
-            <a
+      ({ title, description, img, url, action = "open", sourceUrl }) => {
+        const ImageContainer = !url && !sourceUrl ? "div" : "a";
+        const Title = !url && !sourceUrl ? "p" : "a";
+        return (
+          <div class="group flex flex-col space-y-3">
+            <ImageContainer
               href={url ?? sourceUrl}
-              class={cn(
-                "font-medium transition-colors",
-                "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
-              )}
+              class="flex aspect-video items-center justify-center overflow-hidden md:aspect-[24/9]"
             >
-              {title}
-            </a>
-            <div class="flex space-x-2">
-              {url && (
-                <a
-                  href={url}
-                  class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
-                >
-                  <ExternalLink size={12} />
-                  {action}
-                </a>
-              )}
-              {sourceUrl && (
-                <a
-                  href={sourceUrl}
-                  class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
-                >
-                  <Git size={12} />
-                  source code
-                </a>
-              )}
+              <Image
+                src={img}
+                alt={title}
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </ImageContainer>
+            <div class="flex items-center justify-between">
+              <Title
+                href={url ?? sourceUrl}
+                class={cn(
+                  "font-medium transition-colors",
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600",
+                  (url || sourceUrl) &&
+                    "hover:decoration-neutral-600 dark:hover:decoration-neutral-400",
+                )}
+              >
+                {title}
+              </Title>
+              <div class="flex space-x-2">
+                {url && (
+                  <a
+                    href={url}
+                    class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
+                  >
+                    <ExternalLink size={12} />
+                    {action}
+                  </a>
+                )}
+                {sourceUrl && (
+                  <a
+                    href={sourceUrl}
+                    class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
+                  >
+                    <Git size={12} />
+                    source code
+                  </a>
+                )}
+              </div>
             </div>
+            <p class="prose prose-neutral dark:prose-invert">{description}</p>
           </div>
-          <p class="prose prose-neutral dark:prose-invert">{description}</p>
-        </div>
-      ),
+        );
+      },
     )
   }
 </Layout>

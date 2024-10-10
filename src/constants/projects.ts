@@ -1,3 +1,4 @@
+import brad from "~/assets/projects/brad.png";
 import screenRec from "~/assets/projects/browser-screen-recorder.png";
 import carbonBot from "~/assets/projects/carbon.png";
 import compress from "~/assets/projects/compress.png";
@@ -89,5 +90,11 @@ export const PROJECTS = [
       "yet another discord music bot written in lua using discordia. it's no longer maintained and archived on github.",
     img: luaBot,
     sourceUrl: "https://github.com/Podter/Music-Bot-Lua",
+  },
+  {
+    title: "Brad",
+    description:
+      "a discord bot that helps me and my friends to get things done quickly. not available for public use, but can see him if you see me around.",
+    img: brad,
   },
 ] as const as Project[];
