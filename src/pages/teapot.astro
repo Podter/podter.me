@@ -1,0 +1,14 @@
+---
+import Error from "~/layouts/error.astro";
+
+export const prerender = false;
+
+Astro.response.status = 418;
+Astro.response.statusText = "I'm a teapot";
+---
+
+<Error
+  title="I'm a teapot"
+  description="You're trying to brew coffee with a teapot using HTCPCP."
+  code="418"
+/>
