@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+
+import { DESCRIPTION } from "~/constants/metadata";
 ---
 
 <script is:inline>
@@ -36,7 +38,7 @@ import { ViewTransitions } from "astro:transitions";
   );
 </script>
 
-<script>
+<script is:inline define:vars={{ description: DESCRIPTION.toLowerCase() }}>
   console.log(
     "%c⠀podter._  ",
     `
@@ -47,7 +49,7 @@ import { ViewTransitions } from "astro:transitions";
       font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     `,
   );
-  console.log("a student and self-taught developer from thailand.");
+  console.log(description);
 </script>
 
 <script
