@@ -1,21 +1,121 @@
 ---
+import Steam from "~/components/about/steam.astro";
+import WakaTime from "~/components/about/wakatime.astro";
+import ArrowUpRight from "~/components/icons/arrow-up-right.astro";
+import Spinner from "~/components/spinner.svelte";
+import { SOCIALS } from "~/constants/socials";
 import Layout from "~/layouts/layout.astro";
+import { cn } from "~/lib/utils";
 ---
 
 <Layout title="About" description="Get to know me a little better.">
   <h1 class="mb-5 font-serif text-3xl font-medium">about me</h1>
   <article class="prose prose-neutral dark:prose-invert">
     <p>
-      lorem ipsum dolor sit amet consectetur adipisicing elit. obcaecati
-      explicabo reiciendis quisquam, debitis aut dolorum praesentium porro, modi
-      repudiandae voluptates architecto aspernatur fugit? Harum id minima ea
-      fuga quia accusantium.
+      hey, i&apos;m <u>podter</u>. some people call me <u>pod</u> for short. i&apos;m
+      a student and self-taught developer from thailand. i enjoy coding, playing
+      games, and listening to music. i do web development and linux stuff.
     </p>
     <p>
-      lorem ipsum dolor sit amet consectetur adipisicing elit. obcaecati
-      explicabo reiciendis quisquam, debitis aut dolorum praesentium porro, modi
-      repudiandae voluptates architecto aspernatur fugit? Harum id minima ea
-      fuga quia accusantium.
+      i&apos;m currently trying to manage my life to get into an university. i
+      also work on a few projects in my free time.
     </p>
+    <hr class="my-6 border-t border-neutral-400 dark:border-neutral-600" />
+    <p>
+      i enjoy computer stuff since i was young. my parents taught me how to play
+      computer games and it blew my mind. then i play with virtual machines,
+      installing linux, old versions of windows, and trying to break stuff. it
+      was fun.
+    </p>
+    <p>
+      i started learning lua in roblox studio. it was my first programming
+      language and i made a few games and scripts just for fun. the starting
+      point of my programming journey was me building a discord bot with
+      typescript. i learned a lot from that and now it became my main
+      programming language.
+    </p>
+    <WakaTime server:defer>
+      <p
+        slot="fallback"
+        class="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 dark:text-neutral-400"
+      >
+        working with wakatime <Spinner client:visible />
+      </p>
+    </WakaTime>
+    <p>
+      if i&apos;m not coding then i&apos;m probably playing games or finding
+      something to watch. or maybe i&apos;m just lights out and scrolling
+      through my social media. i like indie games and adventure games. i also
+      enjoy watching
+      <a href="https://www.southparkstudios.com" class="cartman">south park</a>
+      and <a href="https://www.bluey.tv" class="bluey">bluey</a>.
+    </p>
+    <Steam server:defer>
+      <p
+        slot="fallback"
+        class="inline-flex items-center gap-1 text-sm font-medium text-neutral-600 dark:text-neutral-400"
+      >
+        working with steam <Spinner client:visible />
+      </p>
+    </Steam>
+    <hr class="my-6 border-t border-neutral-400 dark:border-neutral-600" />
+    <h2 class="not-prose mb-4 font-serif text-2xl font-medium">links</h2>
+    <div class="not-prose grid gap-3 sm:grid-cols-2">
+      {
+        Object.entries(SOCIALS).map(([social, { href, user }]) => (
+          <a
+            class={cn(
+              "group flex h-full w-full items-center justify-between p-3",
+              "border border-dashed border-neutral-400 hover:border-solid dark:border-neutral-600",
+            )}
+            href={href}
+            target="_blank"
+          >
+            <p class="text-sm">
+              <span class="font-medium text-neutral-600 dark:text-neutral-400">
+                {social}
+              </span>
+              : {user}
+            </p>
+            <div class="text-neutral-600 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 dark:text-neutral-400">
+              <ArrowUpRight size={16} />
+            </div>
+          </a>
+        ))
+      }
+    </div>
   </article>
 </Layout>
+
+<style>
+  u,
+  .cartman,
+  .bluey {
+    @apply font-medium text-neutral-900 decoration-neutral-400 decoration-1 underline-offset-4 dark:text-white dark:decoration-neutral-600;
+  }
+
+  .cartman,
+  .bluey {
+    @apply transition-colors hover:decoration-neutral-600 dark:hover:decoration-neutral-400;
+  }
+
+  .cartman::before,
+  .bluey::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 3px;
+    margin-bottom: -2px;
+  }
+
+  .cartman::before {
+    background: url("/about/cartman.png") no-repeat 0 0;
+    background-size: 100%;
+  }
+
+  .bluey::before {
+    background: url("/about/bluey.png") no-repeat 0 0;
+    background-size: 100%;
+  }
+</style>

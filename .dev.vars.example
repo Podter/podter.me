@@ -12,3 +12,12 @@ DISCORD_BOT_TOKEN=""
 # https://authjs.dev/getting-started/providers/github
 GITHUB_ID=""
 GITHUB_SECRET=""
+
+# WakaTime
+# Get your API key from https://wakatime.com/settings/account
+WAKATIME_SECRET_API_KEY=""
+
+# Steam
+# Get one from https://steamcommunity.com/dev/apikey
+STEAM_API_KEY=""
+STEAMGRIDDB_API_KEY=""

@@ -1,0 +1,70 @@
+---
+import { cache } from "~/lib/cache";
+import Progress from "./progress.svelte";
+
+interface WakaTimeResponse {
+  data: {
+    languages: {
+      name: string;
+      text: string;
+      percent: number;
+    }[];
+  };
+}
+
+const getWakaTime = cache(
+  async (locals) => {
+    const { data } = await fetch(
+      "https://wakatime.com/api/v1/users/current/stats/last_7_days",
+      {
+        headers: {
+          Authorization: `Basic ${btoa(locals.runtime.env.WAKATIME_SECRET_API_KEY)}`,
+        },
+      },
+    ).then((res) => res.json<WakaTimeResponse>());
+    return data.languages
+      .slice(0, 5)
+      .sort((a, b) => (a.name === "Other" ? 1 : b.name === "Other" ? -1 : 0))
+      .map(({ name, text, percent }) => ({
+        name: name === "Other" ? "using browser" : name.toLowerCase(),
+        text: text.toLowerCase(),
+        percent,
+      }));
+  },
+  "wakatime-data",
+  { expirationTtl: 86400 },
+);
+
+const data = await getWakaTime(Astro.locals);
+---
+
+<div
+  class="not-prose flex flex-col border border-dashed border-neutral-400 p-4 text-neutral-700 dark:border-neutral-600 dark:text-neutral-300"
+>
+  <p class="mb-3 font-medium leading-none">
+    wakatime activity
+    <span class="text-sm font-normal text-neutral-600 dark:text-neutral-400">
+      (last 7 days)
+    </span>
+  </p>
+  <div class="flex flex-col space-y-3">
+    {
+      data.map(({ name, text, percent }) => (
+        <div class="flex flex-col space-y-2">
+          <div class="flex w-full justify-between text-sm">
+            <p class="font-medium leading-none">
+              {name}{" "}
+              <span class="font-normal text-neutral-600 dark:text-neutral-400">
+                {text}
+              </span>
+            </p>
+            <p class="text-neutral-600 dark:text-neutral-400">
+              {percent.toFixed(2)}%
+            </p>
+          </div>
+          <Progress value={percent} aria-label={name} />
+        </div>
+      ))
+    }
+  </div>
+</div>
