@@ -7,3 +7,13 @@ import Error from "~/layouts/error.astro";
   description="You are looking for something that doesn't actually exist."
   code="404"
 />
+
+<script is:inline define:vars={{ path: Astro.url.pathname }}>
+  setTimeout(() => {
+    window.umami.track((props) => ({
+      ...props,
+      name: "Not found",
+      data: { path },
+    }));
+  }, 1000);
+</script>

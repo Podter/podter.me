@@ -7,3 +7,13 @@ import Error from "~/layouts/error.astro";
   description="An unexpected error occurred. This rarely happens."
   code="500"
 />
+
+<script is:inline define:vars={{ path: Astro.url.pathname }}>
+  setTimeout(() => {
+    window.umami.track((props) => ({
+      ...props,
+      name: "Error",
+      data: { path },
+    }));
+  }, 1000);
+</script>
