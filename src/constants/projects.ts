@@ -32,7 +32,7 @@ export const PROJECTS = [
     description:
       "the simplest url shortener. built with sveltekit, cloudflare kv, and deployed to cloudflare pages.",
     shortDescription:
-      "the simplest url shortener. built with sveltekit, and cloudflare kv.",
+      "the simplest url shortener. built with sveltekit and cloudflare kv.",
     img: urlShortener,
     url: "https://s.podter.me",
     sourceUrl: "https://github.com/Podter/s.podter.me",
