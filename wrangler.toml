@@ -6,9 +6,9 @@ pages_build_output_dir = "./dist"
 [[d1_databases]]
 binding = "D1_DATABASE"
 database_name = "podter-website-test"
-database_id = "3b9a6c45-6a54-45d9-87ad-64ec6458769e"
+database_id = "e7342b72-bb1e-4c9e-8467-7229a7afdf38"
 migrations_dir = "migrations"
 
 [[kv_namespaces]]
 binding = "KV_CACHE"
-id = "c594175f8ada4f54b5a374158d2376af"
+id = "46b5add58ec24b038a97ea73d1723f41"
