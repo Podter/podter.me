@@ -22,7 +22,7 @@ export const PROJECTS = [
   {
     title: "podter.me",
     description:
-      "the website that you are currently on right now. built with astro, tailwindcss, auth.js, cloudflare d1, cloudflare kv, and deployed to cloudflare pages.",
+      "the website that you are currently on right now. built with astro, svelte, tailwindcss, auth.js, cloudflare d1, cloudflare kv, and deployed to cloudflare pages.",
     shortDescription:
       "the website that you are currently on right now. built with astro.",
     img: podWeb,
