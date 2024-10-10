@@ -46,5 +46,6 @@ export const elapsed = derived(lanyardRawData, ($data, set) => {
     set(getTime(timestamps));
   }, 200);
 
+  // @ts-expect-error - this is a valid clearInterval call
   return () => clearInterval(interval);
 });
