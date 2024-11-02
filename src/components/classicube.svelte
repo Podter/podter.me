@@ -65,7 +65,8 @@
 
   const IDBFS_DB_VERSION = 21;
   const IDBFS_DB_STORE_NAME = "FILE_DATA";
-  const DEFAULT_OPTIONS_TXT = `key-Inventory=E
+  const DEFAULT_OPTIONS_TXT = `soundsvolume=99
+key-Inventory=E
 key-DropBlock=Q
 key-FlyDown=ShiftLeft
 key-FlyUp=Space
