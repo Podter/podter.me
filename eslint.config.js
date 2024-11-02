@@ -9,7 +9,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   includeIgnoreFile(path.join(import.meta.dirname, ".gitignore")),
-  { ignores: ["**/*.config.*", ".prettierrc.mjs"] },
+  { ignores: ["**/*.config.*", ".prettierrc.mjs", "public/*"] },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
