@@ -22,7 +22,7 @@ async function get(url, github = false) {
   const res = await fetch(url, {
     headers: github
       ? {
-          Authorization: `token ${process.env.GITHUB_TOKEN}`,
+          Authorization: `token ${process.env.BUILD_GITHUB_TOKEN}`,
           Accept: "application/vnd.github.raw",
         }
       : {},
@@ -43,7 +43,7 @@ async function getClassiCube() {
 }
 
 async function getTexture() {
-  if (!process.env.GITHUB_TOKEN) return;
+  if (!process.env.BUILD_GITHUB_TOKEN) return;
   console.log("Downloading texture pack...");
   const zip = await get(TEXTURE_URL, true).then((res) => res.arrayBuffer());
   const outPath = path.join(OUT_DIR, "default.zip");
@@ -59,7 +59,7 @@ async function getTexture() {
  */
 
 async function getSounds() {
-  if (!process.env.GITHUB_TOKEN) return;
+  if (!process.env.BUILD_GITHUB_TOKEN) return;
   console.log("Downloading sounds...");
   /** @type {Sound[]} */
   const sounds = await get(SOUNDS_URL, true).then(
