@@ -1,5 +1,6 @@
 ---
 import type { Props as HeadProps } from "~/components/head.astro";
+import ClassiCube from "~/components/classicube.svelte";
 import ClientScripts from "~/components/client-scripts.astro";
 import Footer from "~/components/footer.astro";
 import Head from "~/components/head.astro";
@@ -30,6 +31,7 @@ const { className, ...head } = Astro.props;
       <slot />
     </main>
     <Footer />
+    <ClassiCube client:only="svelte" />
   </body>
 </html>
 
