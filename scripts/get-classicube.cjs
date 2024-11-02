@@ -1,7 +1,8 @@
 // @ts-check
+/* eslint-disable @typescript-eslint/no-require-imports */
 
-import fs from "node:fs/promises";
-import path from "node:path";
+const fs = require("node:fs/promises");
+const path = require("node:path");
 
 const JS_URL = "https://cs.classicube.net/client/latest/ClassiCube.js";
 
@@ -10,9 +11,7 @@ const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/`;
 const TEXTURE_URL = GITHUB_API + "default.zip";
 const SOUNDS_URL = GITHUB_API + "sounds";
 
-const OUT_DIR = path.join(import.meta.dirname, "..", "public", "classicube");
-
-await fs.rm(OUT_DIR, { recursive: true, force: true });
+const OUT_DIR = path.join(__dirname, "..", "public", "classicube");
 
 /**
  * @param {string} url
@@ -82,5 +81,13 @@ async function getSounds() {
   console.log(`Downloaded sounds to ${outPath}`);
 }
 
-await fs.mkdir(OUT_DIR, { recursive: true });
-await Promise.all([getClassiCube(), getTexture(), getSounds()]);
+async function main() {
+  await fs.rm(OUT_DIR, { recursive: true, force: true });
+  await fs.mkdir(OUT_DIR, { recursive: true });
+  await Promise.all([getClassiCube(), getTexture(), getSounds()]);
+}
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
