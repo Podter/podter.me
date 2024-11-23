@@ -1,55 +1,55 @@
 <script lang="ts">
-  import { cn } from "~/lib/utils";
-  import LogOut from "../icons/log-out.svelte";
-  import Trash from "../icons/trash.svelte";
-  import Spinner from "../spinner.svelte";
+import { cn } from "~/lib/utils";
+import LogOut from "../icons/log-out.svelte";
+import Trash from "../icons/trash.svelte";
+import Spinner from "../spinner.svelte";
 
-  export let name: string;
-  export let initialMessage: string | undefined;
+export let name: string;
+export let initialMessage: string | undefined;
 
-  $: action = initialMessage ? "edit" : "sign";
+$: action = initialMessage ? "edit" : "sign";
 
-  let isLoading = false;
-  let isError = false;
+let isLoading = false;
+let isError = false;
 
-  async function submit(e: SubmitEvent) {
-    e.preventDefault();
-    if (isLoading) return;
+async function submit(e: SubmitEvent) {
+  e.preventDefault();
+  if (isLoading) return;
 
-    isLoading = true;
-    isError = false;
+  isLoading = true;
+  isError = false;
 
-    const formData = new FormData(e.currentTarget as HTMLFormElement);
-    const res = await fetch("/api/guestbook", {
-      method: "POST",
-      body: formData,
-    });
+  const formData = new FormData(e.currentTarget as HTMLFormElement);
+  const res = await fetch("/api/guestbook", {
+    method: "POST",
+    body: formData,
+  });
 
-    if (!res.ok) {
-      isError = true;
-      isLoading = false;
-    } else {
-      location.reload();
-    }
+  if (!res.ok) {
+    isError = true;
+    isLoading = false;
+  } else {
+    location.reload();
   }
+}
 
-  async function deleteMessage() {
-    if (isLoading) return;
+async function deleteMessage() {
+  if (isLoading) return;
 
-    isLoading = true;
-    isError = false;
+  isLoading = true;
+  isError = false;
 
-    const res = await fetch("/api/guestbook", {
-      method: "DELETE",
-    });
+  const res = await fetch("/api/guestbook", {
+    method: "DELETE",
+  });
 
-    if (!res.ok) {
-      isError = true;
-      isLoading = false;
-    } else {
-      location.reload();
-    }
+  if (!res.ok) {
+    isError = true;
+    isLoading = false;
+  } else {
+    location.reload();
   }
+}
 </script>
 
 <div class="mt-6 flex w-full flex-col space-y-2 sm:max-w-96">
