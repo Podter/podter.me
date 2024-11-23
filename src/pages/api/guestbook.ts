@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { sha256 } from "@oslojs/crypto/sha2";
+import { Buffer } from "buffer/";
 import { eq } from "drizzle-orm";
 
 import { getD1, getUtcNow } from "~/database";
@@ -41,9 +42,9 @@ export const POST: APIRoute = async ({ request, locals, cookies }) => {
     await db.insert(guestbook).values({
       user: session.sub,
       message,
-      emailHash: new TextDecoder().decode(
+      emailHash: Buffer.from(
         sha256(new TextEncoder().encode(session.email)),
-      ),
+      ).toString("hex"),
     });
   }
 

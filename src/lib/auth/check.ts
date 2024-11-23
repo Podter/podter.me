@@ -1,4 +1,5 @@
 import { sha256 } from "@oslojs/crypto/sha2";
+import { Buffer } from "buffer/";
 
 import { getD1 } from "~/database";
 
@@ -16,7 +17,7 @@ export async function checkLogin(
     where: ({ emailHash }, { eq }) =>
       eq(
         emailHash,
-        new TextDecoder().decode(sha256(new TextEncoder().encode(email))),
+        Buffer.from(sha256(new TextEncoder().encode(email))).toString("hex"),
       ),
   });
 
