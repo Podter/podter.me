@@ -5,44 +5,24 @@ import GitHub from "../icons/github.astro";
 ---
 
 <div class="flex space-x-4">
-  <sign-in provider="github">
-    <button
-      class={cn(
-        "inline-flex items-center gap-1.5 font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
-      )}
-    >
-      <GitHub size={14} />
-      sign in with github
-    </button>
-  </sign-in>
-  <sign-in provider="discord">
-    <button
-      class={cn(
-        "inline-flex items-center gap-1.5 font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
-      )}
-    >
-      <Discord size={14} />
-      sign in with discord
-    </button>
-  </sign-in>
+  <a
+    href="/auth/github"
+    class={cn(
+      "inline-flex items-center gap-1.5 font-medium transition-colors",
+      "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+    )}
+  >
+    <GitHub size={14} />
+    sign in with github
+  </a>
+  <a
+    href="/auth/discord"
+    class={cn(
+      "inline-flex items-center gap-1.5 font-medium transition-colors",
+      "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+    )}
+  >
+    <Discord size={14} />
+    sign in with discord
+  </a>
 </div>
-
-<script>
-  class SignInButton extends HTMLElement {
-    connectedCallback() {
-      const button = this.querySelector("button");
-      if (button) {
-        button.addEventListener("click", this.handleSignIn.bind(this));
-      }
-    }
-
-    async handleSignIn() {
-      const { signIn } = await import("auth-astro/client");
-      await signIn(this.getAttribute("provider") ?? "");
-    }
-  }
-
-  customElements.define("sign-in", SignInButton);
-</script>

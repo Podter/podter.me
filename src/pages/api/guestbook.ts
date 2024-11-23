@@ -4,12 +4,12 @@ import { sha256 } from "ohash";
 
 import { getD1, getUtcNow } from "~/database";
 import { guestbook } from "~/database/schema";
-import { getSession } from "~/lib/auth";
+import { getCurrentSession } from "~/lib/auth/cookies";
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
-  const session = await getSession(request, locals);
+export const POST: APIRoute = async ({ request, locals, cookies }) => {
+  const session = getCurrentSession(cookies, locals.runtime.env.AUTH_SECRET);
   if (!session) {
     return new Response("Unauthorized", { status: 401 });
   }
@@ -26,7 +26,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     columns: {
       id: true,
     },
-    where: ({ user }, { eq }) => eq(user, session.user.user),
+    where: ({ user }, { eq }) => eq(user, session.sub),
   });
 
   if (existingMessage) {
@@ -39,9 +39,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
       .where(eq(guestbook.id, existingMessage.id));
   } else {
     await db.insert(guestbook).values({
-      user: session.user.user,
+      user: session.sub,
       message,
-      emailHash: sha256(session.user.email),
+      emailHash: sha256(session.email),
     });
   }
 
@@ -50,14 +50,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
   return new Response("OK", { status: 200 });
 };
 
-export const DELETE: APIRoute = async ({ request, locals }) => {
-  const session = await getSession(request, locals);
+export const DELETE: APIRoute = async ({ cookies, locals }) => {
+  const session = getCurrentSession(cookies, locals.runtime.env.AUTH_SECRET);
   if (!session) {
     return new Response("Unauthorized", { status: 401 });
   }
 
   const db = getD1(locals);
-  await db.delete(guestbook).where(eq(guestbook.user, session.user.user));
+  await db.delete(guestbook).where(eq(guestbook.user, session.sub));
 
   await locals.runtime.env.KV_CACHE.delete("guestbook");
 

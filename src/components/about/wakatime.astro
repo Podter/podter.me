@@ -1,4 +1,6 @@
 ---
+import { encodeBase64 } from "@oslojs/encoding";
+
 import { cache } from "~/lib/cache";
 import Progress from "./progress.svelte";
 
@@ -18,9 +20,9 @@ const getWakaTime = cache(
       "https://wakatime.com/api/v1/users/current/stats/last_7_days",
       {
         headers: {
-          Authorization: `Basic ${btoa(locals.runtime.env.WAKATIME_SECRET_API_KEY)}`,
+          Authorization: `Basic ${encodeBase64(new TextEncoder().encode(locals.runtime.env.WAKATIME_SECRET_API_KEY))}`,
         },
-      },
+      }
     ).then((res) => res.json<WakaTimeResponse>());
     return data.languages
       .slice(0, 5)
@@ -32,7 +34,7 @@ const getWakaTime = cache(
       }));
   },
   "wakatime-data",
-  { expirationTtl: 86400 },
+  { expirationTtl: 86400 }
 );
 
 const data = await getWakaTime(Astro.locals);

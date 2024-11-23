@@ -1,10 +1,13 @@
 ---
 import { getD1 } from "~/database";
-import { getSession } from "~/lib/auth";
+import { getCurrentSession } from "~/lib/auth/cookies";
 import FormClient from "./form-client.svelte";
 import SignIn from "./sign-in.astro";
 
-const session = await getSession(Astro.request, Astro.locals);
+const session = getCurrentSession(
+  Astro.cookies,
+  Astro.locals.runtime.env.AUTH_SECRET
+);
 
 let existingMessage: string | undefined;
 if (session) {
@@ -13,7 +16,7 @@ if (session) {
     columns: {
       message: true,
     },
-    where: ({ user }, { eq }) => eq(user, session.user.user),
+    where: ({ user }, { eq }) => eq(user, session.sub),
   });
   if (data) {
     existingMessage = data.message;
@@ -25,7 +28,7 @@ if (session) {
   session ? (
     <FormClient
       client:load
-      session={session}
+      name={session.name}
       initialMessage={existingMessage}
     />
   ) : (

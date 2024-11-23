@@ -1,3 +1,5 @@
+import { encodeBase64 } from "@oslojs/encoding";
+
 import { cache } from "~/lib/cache";
 
 interface DiscordResponse {
@@ -43,7 +45,7 @@ export const fetchUser = cache(
     if (provider === "github") {
       const data = await fetch(`https://api.github.com/user/${userId}`, {
         headers: {
-          Authorization: `Basic ${btoa(`${GITHUB_ID}:${GITHUB_SECRET}`)}`,
+          Authorization: `Basic ${encodeBase64(new TextEncoder().encode(`${GITHUB_ID}:${GITHUB_SECRET}`))}`,
           "User-Agent": "podter-website",
         },
       }).then((res) => res.json<GitHubResponse>());

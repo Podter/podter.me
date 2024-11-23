@@ -1,67 +1,64 @@
 <script lang="ts">
-import type { Session } from "@auth/core/types";
-import { signOut } from "auth-astro/client";
+  import { cn } from "~/lib/utils";
+  import LogOut from "../icons/log-out.svelte";
+  import Trash from "../icons/trash.svelte";
+  import Spinner from "../spinner.svelte";
 
-import { cn } from "~/lib/utils";
-import LogOut from "../icons/log-out.svelte";
-import Trash from "../icons/trash.svelte";
-import Spinner from "../spinner.svelte";
-
-interface FormClientProps {
-  session: Session;
-  initialMessage?: string;
-}
-
-let { session, initialMessage }: FormClientProps = $props();
-
-const action = $derived(initialMessage ? "edit" : "sign");
-
-let isLoading = $state(false);
-let isError = $state(false);
-
-async function submit(e: SubmitEvent) {
-  e.preventDefault();
-  if (isLoading) return;
-
-  isLoading = true;
-  isError = false;
-
-  const formData = new FormData(e.currentTarget as HTMLFormElement);
-  const res = await fetch("/api/guestbook", {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!res.ok) {
-    isError = true;
-    isLoading = false;
-  } else {
-    location.reload();
+  interface FormClientProps {
+    name: string;
+    initialMessage?: string;
   }
-}
 
-async function deleteMessage() {
-  if (isLoading) return;
+  let { name, initialMessage }: FormClientProps = $props();
 
-  isLoading = true;
-  isError = false;
+  const action = $derived(initialMessage ? "edit" : "sign");
 
-  const res = await fetch("/api/guestbook", {
-    method: "DELETE",
-  });
+  let isLoading = $state(false);
+  let isError = $state(false);
 
-  if (!res.ok) {
-    isError = true;
-    isLoading = false;
-  } else {
-    location.reload();
+  async function submit(e: SubmitEvent) {
+    e.preventDefault();
+    if (isLoading) return;
+
+    isLoading = true;
+    isError = false;
+
+    const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const res = await fetch("/api/guestbook", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!res.ok) {
+      isError = true;
+      isLoading = false;
+    } else {
+      location.reload();
+    }
   }
-}
+
+  async function deleteMessage() {
+    if (isLoading) return;
+
+    isLoading = true;
+    isError = false;
+
+    const res = await fetch("/api/guestbook", {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      isError = true;
+      isLoading = false;
+    } else {
+      location.reload();
+    }
+  }
 </script>
 
 <div class="mt-6 flex w-full flex-col space-y-2 sm:max-w-96">
   <p class="text-sm text-neutral-700 dark:text-neutral-300">
-    signed in as <span class="font-semibold">{session.user.name}</span>
+    signed in as <span class="font-semibold">{name}</span>
   </p>
   <form class="flex w-full space-x-2" onsubmit={submit}>
     <input
@@ -98,13 +95,13 @@ async function deleteMessage() {
     <p class="text-sm text-red-500">an error occurred, please try again.</p>
   {/if}
   <div class="flex w-full space-x-3">
-    <button
-      onclick={() => signOut()}
+    <a
+      href="/auth/logout"
       class="inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50"
     >
       <LogOut size={12} />
       sign out
-    </button>
+    </a>
     {#if initialMessage}
       <button
         onclick={deleteMessage}

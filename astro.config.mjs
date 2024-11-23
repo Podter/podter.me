@@ -43,6 +43,9 @@ export default defineConfig({
   experimental: {
     serverIslands: true,
   },
+  security: {
+    checkOrigin: true,
+  },
   markdown: {
     gfm: true,
     syntaxHighlight: "shiki",
