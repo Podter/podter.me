@@ -1,4 +1,4 @@
-import { sha256 } from "ohash";
+import { sha256 } from "@oslojs/crypto/sha2";
 
 import { getD1 } from "~/database";
 
@@ -13,7 +13,11 @@ export async function checkLogin(
     columns: {
       user: true,
     },
-    where: ({ emailHash }, { eq }) => eq(emailHash, sha256(email)),
+    where: ({ emailHash }, { eq }) =>
+      eq(
+        emailHash,
+        new TextDecoder().decode(sha256(new TextEncoder().encode(email))),
+      ),
   });
 
   if (existingMessage) {
