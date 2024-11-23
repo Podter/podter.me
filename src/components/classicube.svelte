@@ -1,5 +1,6 @@
 <script lang="ts">
 import { Dialog } from "bits-ui";
+import { onMount } from "svelte";
 import { fade } from "svelte/transition";
 
 import { flyAndScale } from "~/lib/transition";
@@ -18,10 +19,10 @@ const KONAMI_CODE = [
   "KeyA",
 ];
 
-let dialogOpen = $state(false);
-let konamiIndex = $state(0);
+let dialogOpen = false;
+let konamiIndex = 0;
 
-$effect(() => {
+onMount(() => {
   const controller = new AbortController();
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -71,7 +72,7 @@ key-FlyDown=ShiftLeft
 key-FlyUp=Space
 key-Speed=None`;
 
-$effect(() => {
+onMount(() => {
   const controller = new AbortController();
 
   const db = window.indexedDB.open("/classicube", IDBFS_DB_VERSION);
@@ -131,7 +132,7 @@ $effect(() => {
         id="canvas"
         class="block h-full w-full border-none bg-black p-0"
         tabindex="-1"
-        oncontextmenu={(e) => e.preventDefault()}
+        on:contextmenu={(e) => e.preventDefault()}
       ></canvas>
       <script>
       var Module = {

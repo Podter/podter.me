@@ -1,9 +1,9 @@
 <script lang="ts">
 import Copy from "../icons/copy.svelte";
 
-let { id = "code-block" } = $props();
+export let id = "code-block";
 
-let label = $state("copy");
+let label = "copy";
 
 async function copyCode() {
   try {
@@ -28,7 +28,7 @@ async function copyCode() {
 
 <button
   class="absolute -top-6 right-0 inline-flex items-center gap-1 pb-1 text-sm text-neutral-600 opacity-0 transition-[opacity,color] hover:text-neutral-950 group-hover:opacity-100 dark:text-neutral-400 dark:hover:text-neutral-50"
-  onclick={copyCode}
+  on:click={copyCode}
 >
   <Copy size={12} />
   {label}
