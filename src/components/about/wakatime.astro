@@ -22,7 +22,7 @@ const getWakaTime = cache(
         headers: {
           Authorization: `Basic ${encodeBase64(new TextEncoder().encode(locals.runtime.env.WAKATIME_SECRET_API_KEY))}`,
         },
-      }
+      },
     ).then((res) => res.json<WakaTimeResponse>());
     return data.languages
       .slice(0, 5)
@@ -34,7 +34,7 @@ const getWakaTime = cache(
       }));
   },
   "wakatime-data",
-  { expirationTtl: 86400 }
+  { expirationTtl: 86400 },
 );
 
 const data = await getWakaTime(Astro.locals);

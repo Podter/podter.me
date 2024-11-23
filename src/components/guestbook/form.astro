@@ -6,7 +6,7 @@ import SignIn from "./sign-in.astro";
 
 const session = getCurrentSession(
   Astro.cookies,
-  Astro.locals.runtime.env.AUTH_SECRET
+  Astro.locals.runtime.env.AUTH_SECRET,
 );
 
 let existingMessage: string | undefined;
