@@ -1,9 +1,13 @@
 <script lang="ts">
 import { Avatar } from "bits-ui";
 
-export let src: string;
-export let alt: string;
-export let fallback: string;
+interface AvatarProps {
+  src: string;
+  alt: string;
+  fallback: string;
+}
+
+let { src, alt, fallback }: AvatarProps = $props();
 </script>
 
 <Avatar.Root

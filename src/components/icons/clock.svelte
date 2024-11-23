@@ -1,5 +1,5 @@
 <script lang="ts">
-export let size = 24;
+let { size = 24 } = $props();
 </script>
 
 <svg
