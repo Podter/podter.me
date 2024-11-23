@@ -1,18 +1,16 @@
 <script lang="ts">
-import { onMount } from "svelte";
-
 const LABELS = ["|", "/", "-", "\\"];
 
-let i = 0;
+let i = $state(0);
 
-onMount(() => {
+$effect(() => {
   const interval = setInterval(() => {
     i = (i + 1) % LABELS.length;
   }, 100);
   return () => clearInterval(interval);
 });
 
-$: label = LABELS[i];
+const label = $derived(LABELS[i]);
 </script>
 
 <span class="w-2">{label}</span>

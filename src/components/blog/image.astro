@@ -22,6 +22,7 @@ if (typeof props.height === "string") {
   props.height = parseInt(props.height);
 }
 
+// @ts-expect-error - type mismatch
 const image = await getImage(props);
 
 const additionalAttributes: HTMLAttributes<"img"> = {};
