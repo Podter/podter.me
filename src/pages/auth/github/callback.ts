@@ -54,11 +54,13 @@ export const GET: APIRoute = async ({
     fetch("https://api.github.com/user", {
       headers: {
         Authorization: `Bearer ${token.accessToken()}`,
+        "User-Agent": "podter-website",
       },
     }).then((res) => res.json<GitHubUser>()),
     fetch("https://api.github.com/user/emails", {
       headers: {
         Authorization: `Bearer ${token.accessToken()}`,
+        "User-Agent": "podter-website",
       },
     }).then((res) => res.json<GitHubEmail[]>()),
   ]);
