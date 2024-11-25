@@ -11,12 +11,12 @@ export const SOCIALS = {
     href: `https://discord.com/users/${DISCORD_ID}`,
     user: "@podter",
   },
-  x: {
-    href: "https://x.com/Real_Podter",
-    user: "@Real_Podter",
+  bluesky: {
+    href: "https://bsky.app/profile/podter.me",
+    user: "@podter.me",
   },
   email: {
-    href: "mailto:hello@podter.me",
-    user: "hello@podter.me",
+    href: "mailto:hi@podter.me",
+    user: "hi@podter.me",
   },
 } as const as Record<string, { href: string; user: string }>;
