@@ -14,8 +14,7 @@
     "typecheck": "astro check",
     "db:gen": "drizzle-kit generate",
     "db:push": "wrangler d1 migrations apply podter-website-test --local",
-    "db:push:prod": "wrangler d1 migrations apply podter-website-test --remote",
-    "get-classicube": "node scripts/get-classicube.cjs"
+    "db:push:prod": "wrangler d1 migrations apply podter-website-test --remote"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.9",
