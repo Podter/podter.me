@@ -40,7 +40,7 @@ export const GET: APIRoute = async ({
 
   let token: OAuth2Tokens;
   try {
-    token = await discord.validateAuthorizationCode(code);
+    token = await discord.validateAuthorizationCode(code, null);
   } catch {
     return new Response(
       "something went wrong. please try again later. (invalid code)",
