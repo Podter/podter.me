@@ -13,8 +13,8 @@
     "format": "prettier --write .",
     "typecheck": "astro check",
     "db:gen": "drizzle-kit generate",
-    "db:push": "wrangler d1 migrations apply podter-website-test --local",
-    "db:push:prod": "wrangler d1 migrations apply podter-website-test --remote"
+    "db:push": "wrangler d1 migrations apply podter-website --local",
+    "db:push:prod": "wrangler d1 migrations apply podter-website --remote"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.9",

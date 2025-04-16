@@ -5,7 +5,7 @@ pages_build_output_dir = "./dist"
 
 [[d1_databases]]
 binding = "D1_DATABASE"
-database_name = "podter-website-test"
+database_name = "podter-website"
 database_id = "e7342b72-bb1e-4c9e-8467-7229a7afdf38"
 migrations_dir = "migrations"
 
