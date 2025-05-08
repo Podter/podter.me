@@ -21,6 +21,8 @@ interface SteamGridDBResponse {
   }[];
 }
 
+const STEAM_BLACKLIST = [3205720];
+
 const getSteam = cache(
   async (locals) => {
     const { STEAM_API_KEY, STEAMGRIDDB_API_KEY } = locals.runtime.env;
@@ -30,6 +32,7 @@ const getSteam = cache(
     ).then((res) => res.json<SteamResponse>());
 
     const games = response.games
+      .filter(({ appid }) => !STEAM_BLACKLIST.includes(appid))
       .sort((a, b) => b.rtime_last_played - a.rtime_last_played)
       .slice(0, 5);
 
