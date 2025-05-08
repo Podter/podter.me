@@ -80,21 +80,24 @@ const posts = await getCollection("blog");
     <h2 class="font-serif text-2xl font-medium">writing</h2>
     <div class="flex flex-col space-y-6">
       {
-        posts.slice(0, 3).map(({ data, id }) => (
-          <a href={`/blog/${id}`} class="flex w-full justify-between">
-            <p
-              class={cn(
-                "font-medium transition-colors",
-                "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
-              )}
-            >
-              {data.title.toLowerCase()}
-            </p>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              {format(data.date, "d MMM, yyyy").toLowerCase()}
-            </p>
-          </a>
-        ))
+        posts
+          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+          .slice(0, 3)
+          .map(({ data, id }) => (
+            <a href={`/blog/${id}`} class="flex w-full justify-between">
+              <p
+                class={cn(
+                  "font-medium transition-colors",
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+                )}
+              >
+                {data.title.toLowerCase()}
+              </p>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400">
+                {format(data.date, "d MMM, yyyy").toLowerCase()}
+              </p>
+            </a>
+          ))
       }
     </div>
     <a

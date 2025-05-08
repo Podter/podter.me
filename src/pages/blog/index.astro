@@ -19,21 +19,25 @@ const posts = await getCollection("blog");
     {DESCRIPTION.toLowerCase()}
   </p>
   {
-    posts.map(({ id, data }) => (
-      <a href={`/blog/${id}`} class="group flex flex-col space-y-2">
-        <span
-          class={cn(
-            "font-serif text-xl font-medium",
-            "underline decoration-neutral-400/0 decoration-1 underline-offset-4 transition-colors group-hover:decoration-neutral-400 dark:decoration-neutral-600/0 dark:group-hover:decoration-neutral-600",
-          )}
-        >
-          {data.title}
-        </span>
-        <p class="prose prose-neutral dark:prose-invert">{data.description}</p>
-        <span class="text-sm text-neutral-600 dark:text-neutral-400">
-          {format(data.date, "do MMMM, yyyy").toLowerCase()}
-        </span>
-      </a>
-    ))
+    posts
+      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+      .map(({ id, data }) => (
+        <a href={`/blog/${id}`} class="group flex flex-col space-y-2">
+          <span
+            class={cn(
+              "font-serif text-xl font-medium",
+              "underline decoration-neutral-400/0 decoration-1 underline-offset-4 transition-colors group-hover:decoration-neutral-400 dark:decoration-neutral-600/0 dark:group-hover:decoration-neutral-600",
+            )}
+          >
+            {data.title}
+          </span>
+          <p class="prose prose-neutral dark:prose-invert">
+            {data.description}
+          </p>
+          <span class="text-sm text-neutral-600 dark:text-neutral-400">
+            {format(data.date, "do MMMM, yyyy").toLowerCase()}
+          </span>
+        </a>
+      ))
   }
 </Layout>

@@ -12,11 +12,13 @@ export const GET: APIRoute = async ({ site }) => {
     title: NAME,
     description: DESCRIPTION,
     site: site ?? "",
-    items: posts.map((post) => ({
-      title: post.data.title,
-      description: post.data.description,
-      link: `/blog/${post.id}/`,
-      pubDate: post.data.date,
-    })),
+    items: posts
+      .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+      .map((post) => ({
+        title: post.data.title,
+        description: post.data.description,
+        link: `/blog/${post.id}/`,
+        pubDate: post.data.date,
+      })),
   });
 };
