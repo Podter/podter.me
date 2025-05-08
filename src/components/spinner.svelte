@@ -3,7 +3,7 @@ import { onMount } from "svelte";
 
 const LABELS = ["|", "/", "-", "\\"];
 
-let i = 0;
+let i = $state(0);
 
 onMount(() => {
   const interval = setInterval(() => {
@@ -12,7 +12,7 @@ onMount(() => {
   return () => clearInterval(interval);
 });
 
-$: label = LABELS[i];
+const label = $derived(LABELS[i]);
 </script>
 
 <span class="w-2">{label}</span>

@@ -4,13 +4,17 @@ import LogOut from "../icons/log-out.svelte";
 import Trash from "../icons/trash.svelte";
 import Spinner from "../spinner.svelte";
 
-export let name: string;
-export let initialMessage: string | undefined;
+interface Props {
+  name: string;
+  initialMessage?: string;
+}
 
-$: action = initialMessage ? "edit" : "sign";
+let { name, initialMessage }: Props = $props();
 
-let isLoading = false;
-let isError = false;
+const action = $derived(initialMessage ? "edit" : "sign");
+
+let isLoading = $state(false);
+let isError = $state(false);
 
 async function submit(e: SubmitEvent) {
   e.preventDefault();
@@ -56,7 +60,7 @@ async function deleteMessage() {
   <p class="text-sm text-neutral-700 dark:text-neutral-300">
     signed in as <span class="font-semibold">{name}</span>
   </p>
-  <form class="flex w-full space-x-2" on:submit={submit}>
+  <form class="flex w-full space-x-2" onsubmit={submit}>
     <input
       class={cn(
         "flex h-9 w-full border-b border-neutral-400 bg-transparent py-1 text-sm transition-colors dark:border-neutral-600",
@@ -101,7 +105,7 @@ async function deleteMessage() {
     </a>
     {#if initialMessage}
       <button
-        on:click={deleteMessage}
+        onclick={deleteMessage}
         disabled={isLoading}
         class={cn(
           "inline-flex items-center gap-1 text-sm text-neutral-600 transition-colors hover:text-neutral-950 dark:text-neutral-400 dark:hover:text-neutral-50",
