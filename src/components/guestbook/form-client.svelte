@@ -70,7 +70,7 @@ async function deleteMessage() {
       name="message"
       required
       disabled={isLoading}
-      value={initialMessage ? initialMessage : ""}
+      value={initialMessage ?? ""}
     />
     <button
       class={cn(

@@ -6,8 +6,6 @@ import { setSessionCookie } from "~/lib/auth/cookies";
 import { createJWT } from "~/lib/auth/jwt";
 import { createGitHub, GITHUB_STATE_COOKIE } from "~/lib/auth/providers";
 
-export const prerender = false;
-
 interface GitHubUser {
   id: number;
   login: string; // username

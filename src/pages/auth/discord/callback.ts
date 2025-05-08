@@ -6,8 +6,6 @@ import { setSessionCookie } from "~/lib/auth/cookies";
 import { createJWT } from "~/lib/auth/jwt";
 import { createDiscord, DISCORD_STATE_COOKIE } from "~/lib/auth/providers";
 
-export const prerender = false;
-
 interface DiscordResponse {
   id: string;
   username: string;

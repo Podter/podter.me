@@ -4,6 +4,8 @@ import Messages from "~/components/guestbook/messages.astro";
 import Spinner from "~/components/spinner.svelte";
 import Layout from "~/layouts/layout.astro";
 
+export const prerender = true;
+
 const TITLE = "Guestbook";
 const DESCRIPTION = "Sign my guestbook and leave your mark.";
 ---

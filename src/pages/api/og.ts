@@ -4,8 +4,6 @@ import { html } from "satori-html";
 
 import { OG_HEIGHT, OG_WIDTH } from "~/constants/metadata";
 
-export const prerender = false;
-
 export const GET: APIRoute = async ({ url, site }) => {
   const title = url.searchParams.get("title");
   const description = url.searchParams.get("description");

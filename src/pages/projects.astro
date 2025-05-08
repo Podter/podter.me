@@ -7,6 +7,8 @@ import { PROJECTS } from "~/constants/projects";
 import Layout from "~/layouts/layout.astro";
 import { cn } from "~/lib/utils";
 
+export const prerender = true;
+
 const TITLE = "Projects";
 const DESCRIPTION = "A collection of projects I've worked on.";
 ---
@@ -42,7 +44,7 @@ const DESCRIPTION = "A collection of projects I've worked on.";
                 class={cn(
                   "font-medium transition-colors",
                   "underline decoration-neutral-400 decoration-1 underline-offset-4 dark:decoration-neutral-600",
-                  (url || sourceUrl) &&
+                  (url ?? sourceUrl) &&
                     "hover:decoration-neutral-600 dark:hover:decoration-neutral-400",
                 )}
               >

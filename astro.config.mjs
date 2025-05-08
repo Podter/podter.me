@@ -16,7 +16,7 @@ import whiteout from "./src/constants/themes/lambda-whiteout.json";
 // https://astro.build/config
 export default defineConfig({
   site: "https://podter.me",
-  output: "hybrid",
+  output: "server",
   adapter: cloudflare({
     platformProxy: {
       enabled: true,
@@ -40,8 +40,8 @@ export default defineConfig({
       ],
     }),
   ],
-  experimental: {
-    serverIslands: true,
+  legacy: {
+    collections: true,
   },
   security: {
     checkOrigin: true,

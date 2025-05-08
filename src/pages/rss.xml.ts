@@ -4,6 +4,8 @@ import { getCollection } from "astro:content";
 
 import { DESCRIPTION, NAME } from "~/constants/metadata";
 
+export const prerender = true;
+
 export const GET: APIRoute = async ({ site }) => {
   const posts = await getCollection("blog");
   return rss({

@@ -7,8 +7,6 @@ import { getD1, getUtcNow } from "~/database";
 import { guestbook } from "~/database/schema";
 import { getCurrentSession } from "~/lib/auth/cookies";
 
-export const prerender = false;
-
 export const POST: APIRoute = async ({ request, locals, cookies }) => {
   const session = getCurrentSession(cookies, locals.runtime.env.AUTH_SECRET);
   if (!session) {

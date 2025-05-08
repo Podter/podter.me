@@ -7,8 +7,6 @@ import {
   STATE_COOKIE_OPTIONS,
 } from "~/lib/auth/providers";
 
-export const prerender = false;
-
 export const GET: APIRoute = ({ locals, site, cookies, redirect }) => {
   const discord = createDiscord(locals, site);
 
