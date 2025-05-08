@@ -19,8 +19,8 @@ const posts = await getCollection("blog");
     {DESCRIPTION.toLowerCase()}
   </p>
   {
-    posts.map(({ slug, data }) => (
-      <a href={`/blog/${slug}`} class="group flex flex-col space-y-2">
+    posts.map(({ id, data }) => (
+      <a href={`/blog/${id}`} class="group flex flex-col space-y-2">
         <span
           class={cn(
             "font-serif text-xl font-medium",

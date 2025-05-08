@@ -40,9 +40,6 @@ export default defineConfig({
       ],
     }),
   ],
-  legacy: {
-    collections: true,
-  },
   security: {
     checkOrigin: true,
   },
