@@ -26,15 +26,15 @@ const posts = await getCollection("blog");
     </div>
     <p class="prose prose-neutral dark:prose-invert">
       i&apos;m podter. i&apos;m a student and self-taught developer. i enjoy
-      coding and playing games in my free time. i&apos;m currently trying to
-      manage my life to get into a university. i like adventure games, indie
-      games, south park, and bluey.
+      coding and building things on the web. i&apos;m currently majoring in
+      educational technology and computer education. i like adventure games,
+      indie games, and animation. games, south park, and bluey.
     </p>
     <a
       href="/about"
       class={cn(
         "font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
       )}
     >
       about me →
@@ -55,14 +55,14 @@ const posts = await getCollection("blog");
                 }
                 class={cn(
                   "font-medium transition-colors",
-                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
                 )}
               >
                 {title.toLowerCase()}
               </a>
               <p>{shortDescription}</p>
             </div>
-          ),
+          )
         )
       }
     </div>
@@ -70,7 +70,7 @@ const posts = await getCollection("blog");
       href="/projects"
       class={cn(
         "font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
       )}
     >
       view all projects →
@@ -88,7 +88,7 @@ const posts = await getCollection("blog");
               <p
                 class={cn(
                   "font-medium transition-colors",
-                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
                 )}
               >
                 {data.title.toLowerCase()}
@@ -104,7 +104,7 @@ const posts = await getCollection("blog");
       href="/blog"
       class={cn(
         "font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
       )}
     >
       view all posts →
