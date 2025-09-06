@@ -4,10 +4,11 @@ import eslint from "@eslint/js";
 import astroPlugin from "eslint-plugin-astro";
 import importPlugin from "eslint-plugin-import";
 import sveltePlugin from "eslint-plugin-svelte";
+import { defineConfig } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default defineConfig(
   includeIgnoreFile(path.join(import.meta.dirname, ".gitignore")),
   { ignores: ["**/*.config.*", ".prettierrc.mjs", "public/*"] },
   eslint.configs.recommended,
