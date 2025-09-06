@@ -34,7 +34,7 @@ const posts = await getCollection("blog");
       href="/about"
       class={cn(
         "font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
       )}
     >
       about me →
@@ -55,14 +55,14 @@ const posts = await getCollection("blog");
                 }
                 class={cn(
                   "font-medium transition-colors",
-                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
                 )}
               >
                 {title.toLowerCase()}
               </a>
               <p>{shortDescription}</p>
             </div>
-          )
+          ),
         )
       }
     </div>
@@ -70,7 +70,7 @@ const posts = await getCollection("blog");
       href="/projects"
       class={cn(
         "font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
       )}
     >
       view all projects →
@@ -88,7 +88,7 @@ const posts = await getCollection("blog");
               <p
                 class={cn(
                   "font-medium transition-colors",
-                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+                  "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
                 )}
               >
                 {data.title.toLowerCase()}
@@ -104,7 +104,7 @@ const posts = await getCollection("blog");
       href="/blog"
       class={cn(
         "font-medium transition-colors",
-        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400"
+        "underline decoration-neutral-400 decoration-1 underline-offset-4 hover:decoration-neutral-600 dark:decoration-neutral-600 dark:hover:decoration-neutral-400",
       )}
     >
       view all posts →
