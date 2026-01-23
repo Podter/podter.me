@@ -35,7 +35,6 @@ export const lanyardRawData = readable<LanyardData>(undefined, (set) => {
 
   return () => {
     socket.close();
-    // @ts-expect-error - this is a valid clearInterval call
     clearInterval(interval);
   };
 });

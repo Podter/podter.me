@@ -16,6 +16,5 @@ const getTime = () =>
 
 export const time = readable<string>(getTime(), (set) => {
   const interval = setInterval(() => set(getTime()), 1000);
-  // @ts-expect-error - this is a valid clearInterval call
   return () => clearInterval(interval);
 });
