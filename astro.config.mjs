@@ -68,4 +68,9 @@ export default defineConfig({
       ],
     ],
   },
+  vite: {
+    ssr: {
+      external: ["node:buffer"],
+    },
+  },
 });

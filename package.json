@@ -8,13 +8,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "bun typecheck && astro build",
-    "preview": "wrangler pages dev",
+    "preview": "wrangler dev",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
     "typecheck": "astro check",
     "db:gen": "drizzle-kit generate",
     "db:push": "wrangler d1 migrations apply podter-website --local",
-    "db:push:prod": "wrangler d1 migrations apply podter-website --remote"
+    "db:push:prod": "wrangler d1 migrations apply podter-website --remote",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",
@@ -25,7 +26,6 @@
     "arctic": "^3.7.0",
     "astro": "^5.16.14",
     "bits-ui": "^2.15.4",
-    "buffer": "^6.0.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.45.1",
@@ -43,7 +43,6 @@
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/svelte": "^7.2.5",
     "@astrojs/tailwind": "^6.0.2",
-    "@cloudflare/workers-types": "^4.20260123.0",
     "@eslint/compat": "^2.0.1",
     "@eslint/js": "^9.39.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",

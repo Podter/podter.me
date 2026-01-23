@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import type { KVNamespacePutOptions } from "@cloudflare/workers-types";
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Callback = (locals: Runtime, ...args: any[]) => Promise<any>;
 
