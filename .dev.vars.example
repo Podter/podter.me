@@ -15,6 +15,7 @@ GITHUB_SECRET=""
 
 # WakaTime
 # Get your API key from https://wakatime.com/settings/account
+WAKATIME_ENDPOINT="https://wakatime.com"
 WAKATIME_SECRET_API_KEY=""
 
 # Steam
