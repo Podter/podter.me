@@ -4,20 +4,7 @@ import { html } from "satori-html";
 
 import { OG_HEIGHT, OG_WIDTH } from "~/constants/metadata";
 
-export const GET: APIRoute = async ({ url, site, rewrite }) => {
-  const type = url.searchParams.get("type");
-  if (type !== "svg") {
-    const newUrl = new URL(url);
-    newUrl.searchParams.set("type", "svg");
-    return fetch(newUrl, {
-      cf: {
-        image: {
-          format: "png",
-        },
-      },
-    });
-  }
-
+export const GET: APIRoute = async ({ url, site }) => {
   const title = url.searchParams.get("title");
   const description = url.searchParams.get("description");
 
@@ -76,9 +63,13 @@ export const GET: APIRoute = async ({ url, site, rewrite }) => {
     ],
   });
 
-  return new Response(svg, {
+  const png = await fetch("https://svg-to-png.podter.workers.dev", {
+    method: "POST",
+    body: svg,
     headers: {
       "Content-Type": "image/svg+xml",
     },
   });
+
+  return png;
 };
