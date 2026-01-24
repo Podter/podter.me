@@ -9,15 +9,13 @@ export const GET: APIRoute = async ({ url, site, rewrite }) => {
   if (type !== "svg") {
     const newUrl = new URL(url);
     newUrl.searchParams.set("type", "svg");
-    return rewrite(
-      new Request(newUrl, {
-        cf: {
-          image: {
-            format: "png",
-          },
+    return fetch(newUrl, {
+      cf: {
+        image: {
+          format: "png",
         },
-      }),
-    );
+      },
+    });
   }
 
   const title = url.searchParams.get("title");
