@@ -10,7 +10,14 @@ import tseslint from "typescript-eslint";
 
 export default defineConfig(
   includeIgnoreFile(path.join(import.meta.dirname, ".gitignore")),
-  { ignores: ["**/*.config.*", ".prettierrc.mjs", "public/*"] },
+  {
+    ignores: [
+      "**/*.config.*",
+      ".prettierrc.mjs",
+      "public/*",
+      "worker-configuration.d.ts",
+    ],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
